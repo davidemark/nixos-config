@@ -7,13 +7,22 @@
 
   programs.home-manager.enable = true;
 
-  # Config Niri tramite home.file
   home.file.".config/niri/config.kdl".text = ''
     input {
         keyboard {
             xkb {
-                layout "it"
+                layout "us"
             }
+        }
+    }
+
+    layout {
+        gaps 8
+        default-column-width { proportion 1.0; }
+        focus-ring {
+            width 2
+            active-color "#7fc8ff"
+            inactive-color "#505050"
         }
     }
 
@@ -30,6 +39,14 @@
 
         Mod+Shift+H { move-column-left; }
         Mod+Shift+L { move-column-right; }
+        Mod+Shift+J { move-window-down; }
+        Mod+Shift+K { move-window-up; }
+
+        Mod+F { maximize-column; }
+        Mod+Shift+F { fullscreen-window; }
+
+        Mod+Minus { set-column-width "-10%"; }
+        Mod+Equal { set-column-width "+10%"; }
 
         Mod+1 { focus-workspace 1; }
         Mod+2 { focus-workspace 2; }
@@ -37,11 +54,17 @@
         Mod+4 { focus-workspace 4; }
         Mod+5 { focus-workspace 5; }
 
-        Mod+Shift+1 { move-window-to-workspace 1; }
-        Mod+Shift+2 { move-window-to-workspace 2; }
-        Mod+Shift+3 { move-window-to-workspace 3; }
-        Mod+Shift+4 { move-window-to-workspace 4; }
-        Mod+Shift+5 { move-window-to-workspace 5; }
+        Mod+Shift+1 { move-column-to-workspace 1; }
+        Mod+Shift+2 { move-column-to-workspace 2; }
+        Mod+Shift+3 { move-column-to-workspace 3; }
+        Mod+Shift+4 { move-column-to-workspace 4; }
+        Mod+Shift+5 { move-column-to-workspace 5; }
+
+        Mod+Page_Down { focus-workspace-down; }
+        Mod+Page_Up   { focus-workspace-up; }
+
+        Print { screenshot; }
+        Ctrl+Print { screenshot-screen; }
     }
   '';
 }
