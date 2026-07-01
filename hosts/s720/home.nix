@@ -18,7 +18,11 @@
 
     layout {
         gaps 8
-        default-column-width { proportion 1.0; }
+        default-column-width { proportion 0.5; }
+        preset-column-widths {
+            proportion 0.5
+            proportion 1.0
+        }
         focus-ring {
             width 2
             active-color "#7fc8ff"
@@ -45,11 +49,11 @@
         Mod+F { maximize-column; }
         Mod+Shift+F { fullscreen-window; }
 
-        Mod+Minus { set-column-width "-10%"; }
-        Mod+Equal { set-column-width "+10%"; }
-
         Mod+R { switch-preset-column-width; }
         Mod+Shift+R { switch-preset-column-width-back; }
+
+        Mod+Minus { set-column-width "-10%"; }
+        Mod+Equal { set-column-width "+10%"; }
 
         Mod+V { toggle-window-floating; }
         Mod+Shift+V { switch-focus-between-floating-and-tiling; }
