@@ -35,9 +35,6 @@
   # Grafica Intel
   hardware.graphics.enable = true;
 
-  # XWayland — necessario per app X11 come Steam
-  programs.xwayland.enable = true;
-
   # Niri
   programs.niri.enable = true;
 
@@ -103,6 +100,7 @@
     tree
     waybar
     wget
+    xwayland-satellite
   ];
 
   system.stateVersion = "26.05";
