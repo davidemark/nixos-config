@@ -15,12 +15,13 @@
     };
   };
 
-  # Foot — font e colori Catppuccin Mocha
+  # Foot
   home.file.".config/foot/foot.ini".text = ''
     [main]
     font=monospace:size=14
 
     [colors-dark]
+    alpha=0.9
     background=1e1e2e
     foreground=cdd6f4
     regular0=45475a
@@ -39,6 +40,147 @@
     bright5=f5c2e7
     bright6=94e2d5
     bright7=a6e3a1
+  '';
+
+  # Waybar config
+  home.file.".config/waybar/config.jsonc".text = ''
+    {
+      "layer": "top",
+      "position": "top",
+      "height": 32,
+      "spacing": 8,
+      "modules-left": ["niri/workspaces"],
+      "modules-center": ["clock"],
+      "modules-right": ["pulseaudio", "backlight", "battery", "network", "cpu", "memory"],
+
+      "niri/workspaces": {
+        "format": "{index}"
+      },
+
+      "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%a %d %b %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+      },
+
+      "battery": {
+        "states": {
+          "warning": 30,
+          "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+      },
+
+      "network": {
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-disconnected": "󰤭",
+        "tooltip-format": "{ifname}: {ipaddr}"
+      },
+
+      "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+          "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      },
+
+      "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
+      },
+
+      "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 5
+      },
+
+      "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 5
+      }
+    }
+  '';
+
+  # Waybar style
+  home.file.".config/waybar/style.css".text = ''
+    * {
+      font-family: monospace;
+      font-size: 13px;
+      border: none;
+      border-radius: 0;
+      min-height: 0;
+    }
+
+    window#waybar {
+      background-color: rgba(30, 30, 46, 0.85);
+      color: #cdd6f4;
+    }
+
+    .modules-left,
+    .modules-center,
+    .modules-right {
+      padding: 0 8px;
+    }
+
+    #workspaces button {
+      padding: 0 6px;
+      color: #585b70;
+      background: transparent;
+    }
+
+    #workspaces button.active {
+      color: #cdd6f4;
+    }
+
+    #workspaces button.focused {
+      color: #89b4fa;
+    }
+
+    #clock {
+      color: #cdd6f4;
+      font-weight: bold;
+    }
+
+    #battery {
+      color: #a6e3a1;
+    }
+
+    #battery.warning {
+      color: #f9e2af;
+    }
+
+    #battery.critical {
+      color: #f38ba8;
+    }
+
+    #network {
+      color: #89b4fa;
+    }
+
+    #pulseaudio {
+      color: #f5c2e7;
+    }
+
+    #pulseaudio.muted {
+      color: #585b70;
+    }
+
+    #backlight {
+      color: #f9e2af;
+    }
+
+    #cpu {
+      color: #94e2d5;
+    }
+
+    #memory {
+      color: #cdd6f4;
+    }
   '';
 
   # Niri
@@ -69,9 +211,25 @@
         }
     }
 
+    prefer-no-csd
+
+    window-rule {
+        geometry-corner-radius 8
+        clip-to-geometry true
+    }
+
+    spawn-at-startup "waybar"
+    spawn-at-startup "swww-daemon"
+    spawn-at-startup "sh" "-c" "sleep 1 && swww img /home/davidemark/repositories/wallpapers/Anime-Girl2.png --transition-type none"
+
     binds {
         Mod+Return { spawn "foot"; }
-        Mod+D { spawn "fuzzel"; }
+        Mod+Space { spawn "fuzzel"; }
+        Mod+B { spawn "firefox"; }
+	Mod+S { spawn "steam"; }
+        Mod+D { spawn "discord"; }
+        Mod+C { spawn "nchat"; }
+        Mod+W { spawn "sh" "-c" "pkill waybar || waybar"; }
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
 
@@ -120,6 +278,17 @@
         Mod+Shift+5 { move-column-to-workspace 5; }
 
         Mod+Shift+Slash { show-hotkey-overlay; }
+
+        // Tasti Fn
+        XF86AudioRaiseVolume allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; }
+        XF86AudioLowerVolume allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+        XF86AudioMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+        XF86AudioMicMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+        XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
+        XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+        XF86AudioPlay { spawn "playerctl" "play-pause"; }
+        XF86AudioNext { spawn "playerctl" "next"; }
+        XF86AudioPrev { spawn "playerctl" "previous"; }
 
         Print { screenshot; }
         Ctrl+Print { screenshot-screen; }
