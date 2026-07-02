@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -9,6 +8,9 @@
 
   # Flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Pacchetti non liberi
+  nixpkgs.config.allowUnfree = true;
 
   # Rete
   networking.hostName = "t480";
@@ -33,14 +35,34 @@
   # Grafica Intel
   hardware.graphics.enable = true;
 
+  # XWayland — necessario per app X11 come Steam
+  programs.xwayland.enable = true;
+
   # Niri
   programs.niri.enable = true;
+
+  # Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
 
   # Audio
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
+  };
+
+  # Thunar
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
+  # Portale XDG
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
   };
 
   # ThinkPad — risparmio energetico e batteria
@@ -54,16 +76,31 @@
     options = "--delete-older-than 30d";
   };
 
-  # Pacchetti base
+  # Pacchetti
   environment.systemPackages = with pkgs; [
+    asciiquarium
+    bluetui
+    btop
+    cbonsai
+    cava
+    claude-code
+    cmatrix
     curl
+    discord
+    distrobox
     fastfetch
     firefox
     foot
     fuzzel
     git
     mako
+    nchat
     neovim
+    openmw
+    podman
+    prismlauncher
+    thunar
+    tree
     waybar
     wget
   ];

@@ -30,6 +30,8 @@
         }
     }
 
+    spawn-at-startup "Xwayland" ":0"
+
     binds {
         Mod+Return { spawn "foot"; }
         Mod+D { spawn "fuzzel"; }
