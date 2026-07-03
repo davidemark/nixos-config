@@ -197,6 +197,12 @@
         }
     }
 
+    cursor {
+	hide-when-typing
+	hide-after-inactive-ms 1000
+    }
+
+
     layout {
         gaps 8
         default-column-width { proportion 0.5; }
