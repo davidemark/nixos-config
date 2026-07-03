@@ -12,6 +12,10 @@
     enable = true;
     shellAliases = {
       ns = "niri-session";
+      ff = "fastfetch";
+      vim = "nvim";
+      nix = "vim ~/repositories/nixos-config";
+      nixt480 = "vim ~/repositories/nixos-config/hosts/t480";
     };
   };
 
@@ -226,7 +230,7 @@
 
     spawn-at-startup "waybar"
     spawn-at-startup "swww-daemon"
-    spawn-at-startup "sh" "-c" "sleep 1 && swww img /home/davidemark/repositories/wallpapers/Anime-Girl2.png --transition-type none"
+    spawn-sh-at-startup "-c sleep 1 && swww img /home/davidemark/repositories/wallpapers/Anime-Girl2.png --transition-type none"
 
     binds {
         Mod+Return { spawn "foot"; }
