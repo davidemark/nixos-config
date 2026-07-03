@@ -82,13 +82,17 @@
     playerctl
     podman
     prismlauncher
-    swww
+    swaybg
     thunar
     tree
     waybar
     wget
     wireplumber
     xwayland-satellite
+  ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
   ];
 
   system.stateVersion = "26.05";
