@@ -2,7 +2,7 @@
 {
   home.file.".config/foot/foot.ini".text = ''
     [main]
-    font=monospace:size=14
+    font=JetBrainsMono Nerd Font:size=14
 
     [colors-dark]
     alpha=0.9

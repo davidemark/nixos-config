@@ -62,6 +62,7 @@
     asciiquarium
     bluetui
     brightnessctl
+    bruno
     btop
     cbonsai
     cava
@@ -76,6 +77,7 @@
     fuzzel
     git
     heroic
+    lazygit
     mako
     mgba
     nchat
