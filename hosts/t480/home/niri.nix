@@ -21,7 +21,7 @@
 
     layout {
         gaps 8
-        default-column-width { proportion 0.5; }
+        default-column-width { proportion 1.0; }
         preset-column-widths {
             proportion 0.5
             proportion 1.0
@@ -50,10 +50,11 @@
         Mod+Return { spawn "foot"; }
         Mod+Space { spawn "fuzzel"; }
         Mod+B { spawn "firefox"; }
-        Mod+S { spawn "steam"; }
+        Mod+G { spawn "steam"; }
         Mod+D { spawn "discord"; }
-        Mod+C { spawn "nchat"; }
-        Mod+W { spawn "sh" "-c" "pkill waybar || waybar"; }
+        Mod+Shift+G { spawn "heroic"; }
+        Mod+T {spawn "thunar"; }
+        Mod+C { spawn "sh" "-c" "pkill waybar || waybar"; }
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
 

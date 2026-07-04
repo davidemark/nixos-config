@@ -78,6 +78,7 @@
     git
     heroic
     lazygit
+    lutris
     mako
     mgba
     nchat
@@ -90,6 +91,7 @@
     swaybg
     swaylock
     swayidle
+    tailscale
     thunar
     tree
     vscode
@@ -97,6 +99,7 @@
     wget
     wireplumber
     xwayland-satellite
+    yazi
   ];
 
   fonts.packages = with pkgs; [
