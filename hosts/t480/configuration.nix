@@ -75,16 +75,22 @@
     foot
     fuzzel
     git
+    heroic
     mako
+    mgba
     nchat
     neovim
+    ollama
     openmw
     playerctl
     podman
     prismlauncher
     swaybg
+    swaylock
+    swayidle
     thunar
     tree
+    vscode
     waybar
     wget
     wireplumber

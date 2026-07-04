@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixvim, ... }: {
     nixosConfigurations = {
 
       s720 = nixpkgs.lib.nixosSystem {
@@ -22,6 +26,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.davidemark = import ./hosts/s720/home.nix;
+            home-manager.sharedModules = [
+              nixvim.homeModules.nixvim
+            ];
           }
         ];
       };
@@ -35,6 +42,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.davidemark = import ./hosts/t480/home.nix;
+            home-manager.sharedModules = [
+              nixvim.homeModules.nixvim
+            ];
           }
         ];
       };
