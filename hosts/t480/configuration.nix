@@ -29,6 +29,8 @@
 
   programs.niri.enable = true;
 
+  programs.dconf.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

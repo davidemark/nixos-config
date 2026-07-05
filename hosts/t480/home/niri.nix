@@ -11,6 +11,7 @@
         touchpad {
             tap
             natural-scroll
+            click-method "clickfinger"
         }
     }
 

@@ -2,6 +2,11 @@
 {
   programs.bash = {
     enable = true;
+    
+    sessionVariables = {
+      GTK_THEME = "catppuccin-frappe-blue-standard";
+    };
+
     shellAliases = {
       ns = "niri-session";
       ff = "fastfetch";
