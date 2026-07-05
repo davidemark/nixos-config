@@ -6,6 +6,7 @@
     ./home/waybar.nix
     ./home/niri.nix
     ./home/neovim.nix
+    ./home/scripts.nix
   ];
 
   home.username = "davidemark";

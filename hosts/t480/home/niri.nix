@@ -44,7 +44,7 @@
 
     spawn-at-startup "waybar"
     spawn-at-startup "swww-daemon"
-    spawn-at-startup "swaybg" "-i" "/home/davidemark/repositories/wallpapers/Anime-Girl2.png" "-m" "fill"
+    spawn-at-startup "sh" "-c" "swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
 
     binds {
         Mod+Return { spawn "foot"; }
@@ -58,6 +58,8 @@
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
 
+        Mod+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/safe"; }
+        Mod+Shift+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/unsafe"; }
         Mod+Escape { spawn "swaylock"; }
 
         Mod+H { focus-column-left; }

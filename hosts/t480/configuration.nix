@@ -95,6 +95,7 @@
     firefox
     foot
     fuzzel
+    qbittorrent
     git
     heroic
     lazygit
