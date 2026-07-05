@@ -86,6 +86,7 @@
     btop
     cbonsai
     cava
+    catppuccin-gtk
     claude-code
     cmatrix
     curl
@@ -107,11 +108,12 @@
     nodejs_24
     ollama
     openmw
-    python3
+    papirus-icon-theme
     playerctl
     podman
     podman-compose
     prismlauncher
+    python3
     swaybg
     swaylock
     swayidle

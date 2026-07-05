@@ -7,6 +7,9 @@
     ./home/niri.nix
     ./home/neovim.nix
     ./home/scripts.nix
+    ./home/lock.nix
+    ./home/gtk.nix
+    ./home/mako.nix
   ];
 
   home.username = "davidemark";
