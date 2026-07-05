@@ -58,6 +58,8 @@
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
 
+        Mod+Escape { spawn "swaylock"; }
+
         Mod+H { focus-column-left; }
         Mod+L { focus-column-right; }
         Mod+J { focus-window-down; }

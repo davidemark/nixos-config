@@ -17,7 +17,7 @@
 
   users.users.davidemark = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "input" "libvirtd" ];
   };
 
   services.openssh = {
@@ -58,7 +58,27 @@
     options = "--delete-older-than 30d";
   };
 
+  security.pam.services.swaylock = {};
+
+  # Virtualizzazione
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  programs.virt-manager.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
+  virtualisation.containers.registries.search = [
+    "docker.io"
+    "ghcr.io"
+    "quay.io"
+  ];
+
   environment.systemPackages = with pkgs; [
+    ani-cli
     asciiquarium
     bluetui
     brightnessctl
@@ -83,17 +103,22 @@
     mgba
     nchat
     neovim
+    nodejs_24
     ollama
     openmw
+    python3
     playerctl
     podman
+    podman-compose
     prismlauncher
     swaybg
     swaylock
     swayidle
     tailscale
     thunar
+    tor-browser
     tree
+    virt-manager
     vscode
     waybar
     wget

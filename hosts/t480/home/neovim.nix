@@ -110,7 +110,42 @@
       cmp-nvim-lsp.enable = true;
       cmp-buffer.enable = true;
       cmp-path.enable = true;
+
+      # Autopairs — chiude automaticamente parentesi, virgolette, ecc.
+      nvim-autopairs.enable = true;
+
+      # Commenti — gcc per commentare una riga, gc in visual mode
+      comment.enable = true;
+
+      # Statusline minimale
+      lualine = {
+        enable = true;
+        settings.options = {
+        theme = "auto";
+        component_separators = { left = ""; right = ""; };
+        section_separators = { left = ""; right = ""; };
+        };
       };
+
+      # Git segni a sinistra — mostra modifiche rispetto al repo
+      gitsigns = {
+        enable = true;
+        settings.signs = {
+          add.text = "▎";
+          change.text = "▎";
+          delete.text = "";
+          topdelete.text = "";
+          changedelete.text = "▎";
+        };
+      };
+
+      # Indent lines — mostra le linee di indentazione
+      indent-blankline.enable = true;
+
+      # Which-key — mostra i keybind disponibili dopo leader
+      which-key.enable = true;
+      
+    };
 
     keymaps = [
       # Navigazione split
