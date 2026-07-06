@@ -66,7 +66,6 @@
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}",
-        "on-click": "~/.local/bin/waybar-network-toggle.sh"
       },
 
       "pulseaudio": {
@@ -183,19 +182,4 @@
     }
   '';
 
-  home.file.".local/bin/waybar-network-toggle.sh" = {
-    executable = true;
-    text = ''
-      #!/bin/sh
-      STATE_FILE="$HOME/.cache/waybar-network-mode"
-
-      if [ -f "$STATE_FILE" ] && [ "$(cat $STATE_FILE)" = "ip" ]; then
-        echo "ssid" > "$STATE_FILE"
-      else
-        echo "ip" > "$STATE_FILE"
-      fi
-
-      pkill -SIGRTMIN+8 waybar
-    '';
-  };
 }

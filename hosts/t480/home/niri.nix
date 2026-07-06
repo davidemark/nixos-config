@@ -52,7 +52,7 @@
         Mod+Space { spawn "fuzzel"; }
         Mod+B { spawn "firefox"; }
         Mod+G { spawn "steam"; }
-        Mod+D { spawn "discord"; }
+        Mod+D { spawn "vesktop"; }
         Mod+Shift+G { spawn "heroic"; }
         Mod+T {spawn "thunar"; }
         Mod+C { spawn "sh" "-c" "pkill waybar || waybar"; }

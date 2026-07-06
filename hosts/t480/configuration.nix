@@ -92,7 +92,6 @@
     claude-code
     cmatrix
     curl
-    discord
     distrobox
     fastfetch
     firefox
@@ -123,6 +122,7 @@
     thunar
     tor-browser
     tree
+    vesktop
     virt-manager
     vscode
     waybar
