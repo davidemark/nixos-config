@@ -1,15 +1,16 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./home/bash.nix
-    ./home/foot.nix
-    ./home/waybar.nix
+    ../../modules/home/bash.nix
+    ../../modules/home/foot.nix
+    ../../modules/home/waybar.nix
+    ../../modules/home/mako.nix
+    ../../modules/home/gtk.nix
+    ../../modules/home/lock.nix
+    ../../modules/home/scripts.nix
+    ../../modules/home/neovim.nix
     ./home/niri.nix
-    ./home/neovim.nix
-    ./home/scripts.nix
-    ./home/lock.nix
-    ./home/gtk.nix
-    ./home/mako.nix
+    ./home/waybar.nix
   ];
 
   home.username = "davidemark";

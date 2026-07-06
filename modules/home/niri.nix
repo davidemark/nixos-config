@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, wallpaperPath ? "/home/davidemark/repositories/wallpapers", ... }:
 {
   home.file.".config/niri/config.kdl".text = ''
     input {
@@ -7,11 +7,6 @@
                 layout "us"
                 options "ctrl:nocaps"
             }
-        }
-        touchpad {
-            tap
-            natural-scroll
-            click-method "clickfinger"
         }
     }
 
@@ -45,23 +40,15 @@
 
     spawn-at-startup "waybar"
     spawn-at-startup "mako"
-    spawn-sh-at-startup "sleep 1 && swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
+    spawn-at-startup "swaybg" "-i" "${wallpaperPath}" "-m" "fill"
 
     binds {
         Mod+Return { spawn "foot"; }
         Mod+Space { spawn "fuzzel"; }
         Mod+B { spawn "firefox"; }
-        Mod+D { spawn "vesktop"; }
-        Mod+G { spawn "steam"; }
-        Mod+Shift+G { spawn "heroic"; }
-        Mod+T { spawn "thunar"; }
-        Mod+C { spawn "sh" "-c" "pkill waybar || waybar"; }
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
         Mod+Escape { spawn "swaylock"; }
-
-        Mod+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/safe"; }
-        Mod+Shift+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/unsafe"; }
 
         Mod+H { focus-column-left; }
         Mod+L { focus-column-right; }
