@@ -13,8 +13,6 @@
         "custom/sep",
         "backlight",
         "custom/sep",
-        "bluetooth",
-        "custom/sep",
         "network",
         "custom/sep",
         "battery"
@@ -68,16 +66,6 @@
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}"
-      },
-
-      "bluetooth": {
-        "format": "󰂯 {status}",
-        "format-connected": "󰂱 {device_alias}",
-        "format-off": "󰂲",
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "blueman-manager"
       },
 
       "pulseaudio": {
@@ -186,15 +174,6 @@
     #backlight {
       color: #e5c890;
       padding: 0 6px;
-    }
-
-    #bluetooth {
-      color: #8caaee;
-      padding: 0 6px;
-    }
-
-    #bluetooth.off {
-      color: #626880;
     }
 
     #custom-sep {

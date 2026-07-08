@@ -8,11 +8,6 @@
                 options "ctrl:nocaps"
             }
         }
-        touchpad {
-            tap
-            natural-scroll
-            click-method "clickfinger"
-        }
     }
 
     cursor {
