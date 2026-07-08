@@ -35,20 +35,13 @@
   virtualisation.spiceUSBRedirection.enable = true;
   programs.virt-manager.enable = true;
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
-
-  virtualisation.containers.registries.search = [
-    "docker.io"
-    "ghcr.io"
-    "quay.io"
-  ];
-
   environment.systemPackages = with pkgs; [
+    heroic
+    lutris
+    ollama
     openmw
+    prismlauncher
+    qbittorrent
     virt-manager
   ];
 

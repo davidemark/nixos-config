@@ -21,7 +21,8 @@
 
   home.pointerCursor = {
     gtk.enable = true;
-    name = "default";
+    name = "catppuccin-frappe-dark-cursors";
+    package = pkgs.catppuccin-cursors.frappeDark;
     size = 24;
   };
 }

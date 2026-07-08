@@ -176,15 +176,6 @@
       padding: 0 6px;
     }
 
-    #bluetooth {
-      color: #8caaee;
-      padding: 0 6px;
-    }
-
-    #bluetooth.off {
-      color: #626880;
-    }
-
     #custom-sep {
       color: #414559;
       padding: 0 2px;

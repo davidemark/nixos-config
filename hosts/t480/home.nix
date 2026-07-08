@@ -3,7 +3,6 @@
   imports = [
     ../../modules/home/bash.nix
     ../../modules/home/foot.nix
-    ../../modules/home/waybar.nix
     ../../modules/home/mako.nix
     ../../modules/home/gtk.nix
     ../../modules/home/lock.nix

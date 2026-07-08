@@ -24,10 +24,20 @@
     options = "--delete-older-than 30d";
   };
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
+  virtualisation.containers.registries.search = [
+    "docker.io"
+    "ghcr.io"
+    "quay.io"
+  ];
+
   environment.systemPackages = with pkgs; [
-    ani-cli
     asciiquarium
-    bluetui
     brightnessctl
     bruno
     btop
@@ -43,23 +53,18 @@
     foot
     fuzzel
     git
-    heroic
     imv
     lazygit
-    lutris
     mako
     mgba
     nchat
     neovim
     nodejs_24
-    ollama
     papirus-icon-theme
     playerctl
     podman
     podman-compose
-    prismlauncher
     python3
-    qbittorrent
     swaybg
     swayidle
     swaylock
