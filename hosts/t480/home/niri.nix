@@ -22,15 +22,15 @@
 
     layout {
         gaps 8
-        default-column-width { proportion 1.0; }
+        default-column-width { proportion 0.5; }
         preset-column-widths {
             proportion 0.5
             proportion 1.0
         }
         focus-ring {
             width 2
-            active-color "#7fc8ff"
-            inactive-color "#505050"
+            active-color "#8caaee"
+            inactive-color "#414559"
         }
     }
 
@@ -44,24 +44,24 @@
     screenshot-path "~/pictures/screenshots/screenshot_%Y-%m-%d_%H-%M-%S.png"
 
     spawn-at-startup "waybar"
-    spawn-at-startup "swww-daemon"
-    spawn-at-startup "sh" "-c" "swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
+    spawn-at-startup "mako"
+    spawn-sh-at-startup "sleep 1 && swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
 
     binds {
         Mod+Return { spawn "foot"; }
         Mod+Space { spawn "fuzzel"; }
         Mod+B { spawn "firefox"; }
-        Mod+G { spawn "steam"; }
         Mod+D { spawn "vesktop"; }
+        Mod+G { spawn "steam"; }
         Mod+Shift+G { spawn "heroic"; }
-        Mod+T {spawn "thunar"; }
+        Mod+T { spawn "thunar"; }
         Mod+C { spawn "sh" "-c" "pkill waybar || waybar"; }
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
+        Mod+Escape { spawn "swaylock"; }
 
         Mod+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/safe"; }
         Mod+Shift+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/unsafe"; }
-        Mod+Escape { spawn "swaylock"; }
 
         Mod+H { focus-column-left; }
         Mod+L { focus-column-right; }

@@ -3,20 +3,20 @@
   programs.swaylock = {
     enable = true;
     settings = {
-      color = "1e1e2e";
+      color = "303446";
       font = "JetBrainsMono Nerd Font";
       indicator-radius = 100;
       indicator-thickness = 7;
-      ring-color = "89b4fa";
-      ring-ver-color = "a6e3a1";
-      ring-wrong-color = "f38ba8";
-      inside-color = "1e1e2e";
-      inside-ver-color = "1e1e2e";
-      inside-wrong-color = "1e1e2e";
-      key-hl-color = "cdd6f4";
-      text-color = "cdd6f4";
-      text-ver-color = "a6e3a1";
-      text-wrong-color = "f38ba8";
+      ring-color = "8caaee";
+      ring-ver-color = "a6d189";
+      ring-wrong-color = "e78284";
+      inside-color = "303446";
+      inside-ver-color = "303446";
+      inside-wrong-color = "303446";
+      key-hl-color = "c6d0f5";
+      text-color = "c6d0f5";
+      text-ver-color = "a6d189";
+      text-wrong-color = "e78284";
       show-failed-attempts = true;
     };
   };

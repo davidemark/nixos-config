@@ -19,11 +19,10 @@
     };
   };
 
-  # Cursore
   home.pointerCursor = {
     gtk.enable = true;
-    name = "Catppuccin-Mocha-Dark-Cursors";
-    package = pkgs.catppuccin-cursors.mochaDark;
+    name = "catppuccin-frappe-dark-cursors";
+    package = pkgs.catppuccin-cursors.frappeDark;
     size = 24;
   };
 }

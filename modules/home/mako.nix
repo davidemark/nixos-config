@@ -3,9 +3,9 @@
   services.mako = {
     enable = true;
     settings = {
-      background-color = "#1e1e2edd";
-      text-color = "#cdd6f4";
-      border-color = "#89b4fadd";
+      background-color = "#303446dd";
+      text-color = "#c6d0f5";
+      border-color = "#8caaeedd";
       border-radius = 8;
       border-size = 2;
       font = "JetBrainsMono Nerd Font 12";
@@ -17,13 +17,13 @@
     };
     extraConfig = ''
       [urgency=low]
-      border-color=#a6e3a1dd
+      border-color=#a6d189dd
 
       [urgency=normal]
-      border-color=#89b4fadd
+      border-color=#8caaeedd
 
       [urgency=high]
-      border-color=#f38ba8dd
+      border-color=#e78284dd
       default-timeout=0
     '';
   };

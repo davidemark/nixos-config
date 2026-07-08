@@ -13,6 +13,8 @@
         "custom/sep",
         "backlight",
         "custom/sep",
+        "bluetooth",
+        "custom/sep",
         "network",
         "custom/sep",
         "battery"
@@ -36,11 +38,11 @@
           "weeks-pos": "left",
           "on-scroll": 1,
           "format": {
-            "months": "<span color='#cdd6f4'><b>{}</b></span>",
-            "days": "<span color='#cdd6f4'>{}</span>",
-            "weeks": "<span color='#585b70'><b>W{}</b></span>",
-            "weekdays": "<span color='#89b4fa'><b>{}</b></span>",
-            "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+            "months": "<span color='#c6d0f5'><b>{}</b></span>",
+            "days": "<span color='#c6d0f5'>{}</span>",
+            "weeks": "<span color='#626880'><b>W{}</b></span>",
+            "weekdays": "<span color='#8caaee'><b>{}</b></span>",
+            "today": "<span color='#e78284'><b><u>{}</u></b></span>"
           }
         },
         "actions": {
@@ -65,7 +67,17 @@
         "format-ethernet": "󰈀 {ipaddr}",
         "format-disconnected": "󰤭",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
-        "tooltip-format-ethernet": "{ifname}: {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}"
+      },
+
+      "bluetooth": {
+        "format": "󰂯 {status}",
+        "format-connected": "󰂱 {device_alias}",
+        "format-off": "󰂲",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "blueman-manager"
       },
 
       "pulseaudio": {
@@ -96,8 +108,8 @@
     }
 
     window#waybar {
-      background-color: rgba(30, 30, 46, 0.90);
-      color: #cdd6f4;
+      background-color: rgba(48, 52, 70, 0.90);
+      color: #c6d0f5;
     }
 
     .modules-left {
@@ -114,72 +126,80 @@
 
     #workspaces button {
       padding: 0 4px;
-      color: #585b70;
+      color: #626880;
       background: transparent;
       transition: all 0.2s ease;
     }
 
     #workspaces button.active {
-      color: #cdd6f4;
-      border-bottom: 2px solid #89b4fa;
+      color: #c6d0f5;
+      border-bottom: 2px solid #8caaee;
     }
 
     #workspaces button:hover {
-      color: #89b4fa;
-      background: rgba(137, 180, 250, 0.1);
+      color: #8caaee;
+      background: rgba(140, 170, 238, 0.1);
     }
 
     #clock {
-      color: #cdd6f4;
+      color: #c6d0f5;
       font-weight: bold;
       padding: 0 8px;
     }
 
     #battery {
-      color: #a6e3a1;
+      color: #a6d189;
       padding: 0 6px;
     }
 
     #battery.warning {
-      color: #f9e2af;
+      color: #e5c890;
     }
 
     #battery.critical {
-      color: #f38ba8;
+      color: #e78284;
       animation: blink 1s linear infinite;
     }
 
     @keyframes blink {
-      to { color: #1e1e2e; background-color: #f38ba8; }
+      to { color: #303446; background-color: #e78284; }
     }
 
     #network {
-      color: #89b4fa;
+      color: #8caaee;
       padding: 0 6px;
     }
 
     #network.disconnected {
-      color: #585b70;
+      color: #626880;
     }
 
     #pulseaudio {
-      color: #f5c2e7;
+      color: #f4b8e4;
       padding: 0 6px;
     }
 
     #pulseaudio.muted {
-      color: #585b70;
+      color: #626880;
     }
 
     #backlight {
-      color: #f9e2af;
+      color: #e5c890;
       padding: 0 6px;
     }
 
+    #bluetooth {
+      color: #8caaee;
+      padding: 0 6px;
+    }
+
+    #bluetooth.off {
+      color: #626880;
+    }
+
     #custom-sep {
-      color: #313244;
+      color: #414559;
       padding: 0 2px;
     }
   '';
-
 }
