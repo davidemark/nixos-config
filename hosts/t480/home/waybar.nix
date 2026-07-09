@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 {
   home.file.".config/waybar/config.jsonc".text = ''
     {

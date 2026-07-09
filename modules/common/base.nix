@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
+
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Rome";
@@ -29,55 +34,10 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-
+  
   virtualisation.containers.registries.search = [
     "docker.io"
     "ghcr.io"
     "quay.io"
-  ];
-
-  environment.systemPackages = with pkgs; [
-    asciiquarium
-    brightnessctl
-    bruno
-    btop
-    cbonsai
-    cava
-    catppuccin-gtk
-    claude-code
-    cmatrix
-    curl
-    distrobox
-    fastfetch
-    firefox
-    foot
-    fuzzel
-    git
-    imv
-    lazygit
-    mako
-    mgba
-    nchat
-    neovim
-    nodejs_24
-    papirus-icon-theme
-    playerctl
-    podman
-    podman-compose
-    python3
-    swaybg
-    swayidle
-    swaylock
-    tailscale
-    thunar
-    tor-browser
-    tree
-    vesktop
-    vscode
-    waybar
-    wget
-    wireplumber
-    xwayland-satellite
-    yazi
   ];
 }

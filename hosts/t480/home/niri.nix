@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 {
   home.file.".config/niri/config.kdl".text = ''
     input {
