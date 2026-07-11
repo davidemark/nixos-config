@@ -21,7 +21,10 @@
     settings.PasswordAuthentication = true;
   };
 
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   nix.gc = {
     automatic = true;
