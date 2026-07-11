@@ -31,6 +31,7 @@
     podman-compose
     python3
     qbittorrent
+    rclone
     swaybg
     swayidle
     swaylock
