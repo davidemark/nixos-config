@@ -39,6 +39,7 @@
     thunar
     tor-browser
     tree
+    unzip
     vesktop
     vscode
     waybar

@@ -65,6 +65,38 @@
         ];
       };
 
+      hp = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/hp/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.davidemark = import ./hosts/hp/home.nix;
+            home-manager.sharedModules = [
+              nixvim.homeModules.nixvim
+            ];
+          }
+        ];
+      };
+
+      d3d3 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/d3d3/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.davidemark = import ./hosts/d3d3/home.nix;
+            home-manager.sharedModules = [
+              nixvim.homeModules.nixvim
+            ];
+          }
+        ];
+      };
+
     };
   };
 }
