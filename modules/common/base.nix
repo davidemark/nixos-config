@@ -13,6 +13,8 @@
 
   networking.networkmanager.enable = true;
 
+  zramSwap.enable = true;
+
   programs.niri.enable = true;
   programs.dconf.enable = true;
 
