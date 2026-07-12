@@ -47,13 +47,18 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    brightnessctl
     btop
+    catppuccin-gtk
     fastfetch
     firefox
+    foot
+    fuzzel
+    git
     imv
     lazygit
+    mako
     nchat
+    neovim
     nodejs_24
     papirus-icon-theme
     playerctl
@@ -61,10 +66,16 @@
     podman-compose
     python3
     rclone
+    swaybg
+    swayidle
+    swaylock
     tailscale
     thunar
     tree
     unzip
+    waybar
+    wireplumber
+    xwayland-satellite
   ];
   
 }
