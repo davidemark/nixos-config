@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common/base.nix
-    ../../modules/common/apps.nix
     ../../modules/common/audio.nix
     ../../modules/common/fonts.nix
     ../../modules/common/portal.nix
@@ -27,6 +26,7 @@
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
     mgba
   ];
 
