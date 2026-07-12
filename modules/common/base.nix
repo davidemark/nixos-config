@@ -45,4 +45,26 @@
     "ghcr.io"
     "quay.io"
   ];
+
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+    btop
+    fastfetch
+    firefox
+    imv
+    lazygit
+    nchat
+    nodejs_24
+    papirus-icon-theme
+    playerctl
+    podman
+    podman-compose
+    python3
+    rclone
+    tailscale
+    thunar
+    tree
+    unzip
+  ];
+  
 }
