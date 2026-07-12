@@ -2,50 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    asciiquarium
-    brightnessctl
     bruno
-    btop
-    cbonsai
-    cava
-    catppuccin-gtk
     claude-code
-    cmatrix
-    curl
     distrobox
-    fastfetch
-    firefox
-    foot
-    fuzzel
-    git
-    imv
-    lazygit
-    mako
-    nchat
-    neovim
-    nodejs_24
     ollama
-    papirus-icon-theme
-    playerctl
-    podman
-    podman-compose
-    python3
     qbittorrent
-    rclone
-    swaybg
-    swayidle
-    swaylock
-    tailscale
-    thunar
     tor-browser
-    tree
-    unzip
     vesktop
     vscode
-    waybar
-    wget
-    wireplumber
-    xwayland-satellite
-    yazi
   ];
 }
