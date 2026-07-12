@@ -7,7 +7,6 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-    enable = true;
     modesetting.enable = true;          # richiesto per Wayland/Niri
     powerManagement.enable = false;      # non serve, non è un laptop
     open = false;                        # kernel module proprietario, più stabile del driver open per la serie 40
