@@ -2,6 +2,10 @@
 
 {
   home.file.".config/niri/config.kdl".text = ''
+    output "DP-1" {
+        mode "1920x1080@60.000"
+    }
+
     input {
         keyboard {
             xkb {
