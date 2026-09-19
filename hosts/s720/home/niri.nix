@@ -50,7 +50,7 @@
     binds {
         Mod+Return { spawn "foot"; }
         Mod+Space { spawn "fuzzel"; }
-        Mod+B { spawn "firefox"; }
+        Mod+B { spawn "brave"; }
         Mod+D { spawn "vesktop"; }
         Mod+G { spawn "steam"; }
         Mod+Shift+G { spawn "heroic"; }
