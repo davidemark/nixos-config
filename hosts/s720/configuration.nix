@@ -16,6 +16,8 @@
     enable = true;
     device = "/dev/sda";
   };
+  # use amdgpu instead of radeon for better performance on Kabini (GX-222GC)
+  boot.kernelParams = [ "amdgpu.cik_support=1" "radeon.cik_support=0" ];
 
   networking.hostName = "s720";
 
