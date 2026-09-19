@@ -2,10 +2,11 @@
 
 {
   environment.systemPackages = with pkgs; [
-    brightnessctl
+    brave
     bruno
     claude-code
     distrobox
+    obsidian
     ollama
     qbittorrent
     tor-browser

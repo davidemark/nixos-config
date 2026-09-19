@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common/base.nix
+    ../../modules/common/dev.nix
     ../../modules/common/audio.nix
     ../../modules/common/fonts.nix
     ../../modules/common/portal.nix

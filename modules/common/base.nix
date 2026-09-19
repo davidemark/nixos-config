@@ -59,12 +59,10 @@
     mako
     nchat
     neovim
-    nodejs_24
     papirus-icon-theme
     playerctl
     podman
     podman-compose
-    python3
     rclone
     swaybg
     swayidle
