@@ -8,6 +8,10 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 2. Then read `second-brain/Welcome.md`, `second-brain/00-Overview/01-System.md` and
    `second-brain/00-Overview/04-Assistant-Notes.md` (working-style rules: CV, cover letters, browser, search status).
 3. If the repos are missing on this machine, tell Davide and offer to clone them.
+4. Check that Remote Control auto-connect is on (`remoteControlAtStartup` is `true` in `~/.claude/settings.json`, or the
+   desktop app setting "Connect new sessions to Remote Control"). If it is off, tell Davide in one line and explain how to
+   enable it (`/config` > "Enable Remote Control for all sessions"). Do not edit `settings.json` through home-manager: it
+   would become read-only and Claude Code writes to it. The setting is per machine, so it must be set once on each PC.
 
 ## Keep this file current (continuity across PCs)
 - Rules that apply to every machine live HERE or in the second-brain, never only in the local auto-memory
