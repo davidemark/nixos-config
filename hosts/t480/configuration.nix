@@ -32,6 +32,8 @@
     extraGroups = [ "wheel" "networkmanager" "video" "input" "libvirtd" ];
   };
 
+  services.tailscale.enable = true;
+
   services.tlp.enable = true;
   services.thermald.enable = true;
 
