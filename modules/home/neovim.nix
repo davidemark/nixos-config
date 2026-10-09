@@ -84,6 +84,7 @@
           pyright.enable = true;      # Python
           html.enable = true;         # HTML
           cssls.enable = true;        # CSS
+          jdtls.enable = true;        # Java
         };
       };
 
