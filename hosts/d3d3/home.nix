@@ -8,6 +8,7 @@
     ../../modules/home/gtk.nix
     ../../modules/home/lock.nix
     ../../modules/home/scripts.nix
+    ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
     ./home/niri.nix
     ./home/waybar.nix
