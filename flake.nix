@@ -81,6 +81,22 @@
         ];
       };
 
+      vm-nix = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/vm-nix/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.davidemark = import ./hosts/vm-nix/home.nix;
+            home-manager.sharedModules = [
+              nixvim.homeModules.nixvim
+            ];
+          }
+        ];
+      };
+
       d3d3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
