@@ -18,6 +18,15 @@
 
   networking.hostName = "t480";
 
+  # Static IP — ThinkPad T480 ethernet is typically enp0s31f6, verify with: ip link show
+  networking.networkmanager.unmanaged = [ "interface-name:enp0s31f6" ];
+  networking.interfaces.enp0s31f6 = {
+    useDHCP = false;
+    ipv4.addresses = [{ address = "192.168.1.102"; prefixLength = 24; }];
+  };
+  networking.defaultGateway = "192.168.1.1";
+  networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
+
   users.users.davidemark = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" "libvirtd" ];

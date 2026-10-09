@@ -69,6 +69,7 @@
     swaylock
     tailscale
     thunar
+    tmux
     tree
     unzip
     waybar
