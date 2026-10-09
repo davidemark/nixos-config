@@ -33,6 +33,8 @@
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
   };
 
+  services.tailscale.enable = true;
+
   security.pam.services.swaylock = {};
 
   system.stateVersion = "26.05";
