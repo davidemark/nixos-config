@@ -12,6 +12,8 @@
     ../../modules/common/gaming.nix
   ];
 
+  swapDevices = [{ device = "/swapfile"; size = 4096; }];
+
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda";
