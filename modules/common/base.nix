@@ -49,10 +49,11 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    brave
     btop
     catppuccin-gtk
+    claude-code
     fastfetch
-    firefox
     foot
     fuzzel
     git
