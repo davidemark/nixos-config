@@ -4,6 +4,8 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
+    max-jobs = 2;
+    stalled-download-timeout = 90;
   };
 
   nixpkgs.config.allowUnfree = true;
