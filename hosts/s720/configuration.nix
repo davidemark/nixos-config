@@ -4,12 +4,10 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common/base.nix
-    ../../modules/common/apps.nix
     ../../modules/common/dev.nix
     ../../modules/common/audio.nix
     ../../modules/common/fonts.nix
     ../../modules/common/portal.nix
-    ../../modules/common/gaming.nix
   ];
 
   swapDevices = [{ device = "/swapfile"; size = 4096; }];
@@ -45,6 +43,12 @@
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
+    bruno
+    distrobox
+    mgba
+    ollama
+    qbittorrent
+    vesktop
   ];
 
   system.stateVersion = "26.05";
