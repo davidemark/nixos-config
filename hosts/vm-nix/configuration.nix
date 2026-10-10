@@ -11,6 +11,8 @@
     ../../modules/common/portal.nix
   ];
 
+  swapDevices = [{ device = "/swapfile"; size = 4096; }];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
