@@ -26,6 +26,7 @@
   networking.interfaces.enp1s0 = {
     useDHCP = false;
     ipv4.addresses = [{ address = "192.168.1.101"; prefixLength = 24; }];
+    wakeOnLan.enable = true;
   };
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
