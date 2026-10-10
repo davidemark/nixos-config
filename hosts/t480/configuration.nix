@@ -45,7 +45,9 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl
+    obsidian
     virt-manager
+    vscode
   ];
 
   system.stateVersion = "26.05";
