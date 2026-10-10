@@ -6,11 +6,9 @@
     bruno
     claude-code
     distrobox
-    obsidian
     ollama
     qbittorrent
     tor-browser
     vesktop
-    vscode
   ];
 }

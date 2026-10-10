@@ -37,5 +37,10 @@
 
   security.pam.services.swaylock = {};
 
+  environment.systemPackages = with pkgs; [
+    obsidian
+    vscode
+  ];
+
   system.stateVersion = "26.05";
 }
