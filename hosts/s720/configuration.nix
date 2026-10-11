@@ -49,7 +49,6 @@
     mgba
     ollama
     qbittorrent
-    rustdesk
     vesktop
   ];
 
