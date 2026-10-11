@@ -5,9 +5,6 @@
     ./hardware-configuration.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
-    ../../modules/common/audio.nix
-    ../../modules/common/fonts.nix
-    ../../modules/common/portal.nix
   ];
 
   swapDevices = [{ device = "/swapfile"; size = 4096; }];
@@ -33,16 +30,6 @@
 
   services.tailscale.enable = true;
   services.qemuGuest.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "niri-session";
-      user = "davidemark";
-    };
-  };
-
-  security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [];
 
