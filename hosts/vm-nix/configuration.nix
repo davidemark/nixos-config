@@ -36,9 +36,9 @@
 
   security.pam.services.swaylock = {};
 
-  # rustdesk: add in a dedicated second build after first boot
-  # (compiles from source ~2-3h, fills disk during nixos-install)
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    rustdesk
+  ];
 
   system.stateVersion = "26.05";
 }
