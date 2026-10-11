@@ -18,4 +18,17 @@
   home.homeDirectory = "/home/davidemark";
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
+
+  systemd.user.services.rustdesk = {
+    Unit = {
+      Description = "RustDesk remote desktop daemon";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.rustdesk}/bin/rustdesk";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
 }

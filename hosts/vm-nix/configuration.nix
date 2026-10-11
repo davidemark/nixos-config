@@ -34,6 +34,14 @@
   services.tailscale.enable = true;
   services.qemuGuest.enable = true;
 
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "niri-session";
+      user = "davidemark";
+    };
+  };
+
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
