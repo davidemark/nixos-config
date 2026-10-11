@@ -38,14 +38,6 @@
 
   services.tailscale.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "niri-session";
-      user = "davidemark";
-    };
-  };
-
   services.tlp.enable = true;
   services.thermald.enable = true;
 
@@ -57,7 +49,6 @@
     mgba
     ollama
     qbittorrent
-    rustdesk
     vesktop
   ];
 
