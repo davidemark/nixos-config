@@ -20,11 +20,12 @@
       nixc = "nvim ~/repositories/nixos-config";
       nixt480 = "nvim ~/repositories/nixos-config/hosts/t480";
       nixs720 = "nvim ~/repositories/nixos-config/hosts/s720";
-      buildt480 = "sudo nixos-rebuild switch --flake .#t480";
-      builds720 = "sudo nixos-rebuild switch --flake .#s720";
-      buildhp = "sudo nixos-rebuild switch --flake .#hp";
-      buildmaster = "sudo nixos-rebuild switch --flake .#master";
-      buildd3d3 = "sudo nixos-rebuild switch --flake .#d3d3";
+      build-t480 = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#t480";
+      build-s720 = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#s720";
+      build-hp = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#hp";
+      build-master = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#master";
+      build-d3d3 = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#d3d3";
+      build-vm-nix = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#vm-nix";
     };
   };
 }
