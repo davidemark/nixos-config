@@ -46,7 +46,6 @@
   environment.systemPackages = with pkgs; [
     brave-origin
     bruno
-    cliphist
     distrobox
     dwarf-fortress
     mgba

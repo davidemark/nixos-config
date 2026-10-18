@@ -45,7 +45,6 @@
 
     spawn-at-startup "waybar"
     spawn-at-startup "mako"
-    spawn-at-startup "sh" "-c" "wl-paste --watch cliphist store"
     spawn-sh-at-startup "sleep 1 && swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
 
     binds {
@@ -57,7 +56,6 @@
         Mod+Shift+G { spawn "heroic"; }
         Mod+T { spawn "thunar"; }
         Mod+C { spawn "sh" "-c" "pkill waybar || waybar"; }
-        Mod+Y { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
         Mod+Q { close-window; }
         Mod+Shift+E { quit; }
         Mod+Escape { spawn "swaylock"; }
