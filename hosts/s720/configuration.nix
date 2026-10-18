@@ -46,6 +46,7 @@
   environment.systemPackages = with pkgs; [
     bruno
     distrobox
+    dwarf-fortress
     mgba
     qbittorrent
     vesktop
