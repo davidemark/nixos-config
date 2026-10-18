@@ -77,6 +77,7 @@
     unzip
     waybar
     wireplumber
+    wl-clipboard
     xwayland-satellite
   ];
   
