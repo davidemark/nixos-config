@@ -18,11 +18,7 @@
         "custom/sep",
         "pulseaudio",
         "custom/sep",
-        "backlight",
-        "custom/sep",
-        "network",
-        "custom/sep",
-        "battery"
+        "network"
       ],
 
       "custom/sep": {
