@@ -30,6 +30,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - Limits: never create accounts or registrations; never do anything that could harm him. Submitting applications,
   sending messages and entering credentials stay his own actions. If a browser site permission is refused, stop and tell him.
 - Answer in the language he writes in (Italian or English).
+- Folder names are lowercase (e.g. `~/download`, `~/repositories`). XDG user dirs are managed by `modules/home/xdg-dirs.nix`.
+  On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
+  `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
 
 ## Code conventions
 - Base package / Maven groupId / namespace: `com.davidemark` (also for C#, Go, others: `davidemark`). Never `com.davide`.

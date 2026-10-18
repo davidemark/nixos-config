@@ -6,6 +6,7 @@
     ../../modules/home/foot.nix
     ../../modules/home/mako.nix
     ../../modules/home/gtk.nix
+    ../../modules/home/xdg-dirs.nix
     ../../modules/home/lock.nix
     ../../modules/home/scripts.nix
     ../../modules/home/claude.nix
