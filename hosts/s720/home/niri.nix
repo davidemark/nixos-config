@@ -113,6 +113,13 @@
         XF86AudioLowerVolume allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
         XF86AudioMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
         XF86AudioMicMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+        // Fallback senza tasti multimediali: Mod+F1..F6 (volume F1-F3, microfono F4-F6)
+        Mod+F1 allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+        Mod+F2 allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+        Mod+F3 allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; }
+        Mod+F4 allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+        Mod+F5 allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"; }
+        Mod+F6 allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ -l 1.0"; }
         XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
         XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
         XF86AudioPlay { spawn "playerctl" "play-pause"; }
