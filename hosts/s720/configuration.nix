@@ -44,6 +44,7 @@
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
+    brave-origin
     bruno
     distrobox
     dwarf-fortress
