@@ -47,7 +47,6 @@
     bruno
     distrobox
     mgba
-    ollama
     qbittorrent
     vesktop
   ];
