@@ -31,6 +31,19 @@
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
 
+  # Il .link di systemd (wakeOnLan.enable) non basta: a runtime la scheda Realtek restava su "Wake-on: d".
+  # Reimposta il WoL a ogni avvio.
+  systemd.services.wol-enp1s0 = {
+    description = "Enable Wake-on-LAN on enp1s0";
+    after = [ "sys-subsystem-net-devices-enp1s0.device" ];
+    bindsTo = [ "sys-subsystem-net-devices-enp1s0.device" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -s enp1s0 wol g";
+    };
+  };
+
   users.users.davidemark = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
