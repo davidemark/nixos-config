@@ -38,6 +38,18 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
 
+## Claude sessions (tmux + Remote Control)
+- When Davide asks for another Claude session, I create it myself, never leave the steps to him: `tmux new-session -d -s <name>
+  -c <project dir> 'claude --remote-control "<name>" -n "<name>" ["<initial prompt>"]'` (same command for every session, so
+  each one shows online with its name in the Claude app). If it stops at "Do you trust this folder?", I confirm it myself
+  (`tmux send-keys -t <name> Down Enter`) after checking the screen shows that prompt for the folder Davide asked for.
+  Then I report the session name and `tmux attach -t <name>`. Standing authorization from Davide (2026-10-21).
+- On claude-rc, every time the LXC starts (boot/reboot) all the standard Claude sessions must be reopened in tmux, each with
+  `--remote-control`, so Davide always sees them online in the app. The list of standard sessions (name, folder) is in the
+  second-brain note `08-Homelab/00-Homelab.md`, section "Sessioni Claude su claude-rc". Keep that list current when a
+  session is added or removed. A session cannot run before boot by itself: the first Claude session that comes up after a
+  restart checks `tmux ls` and recreates the missing ones (a systemd unit can automate it, only if Davide asks).
+
 ## Code conventions
 - Base package / Maven groupId / namespace: `com.davidemark` (also for C#, Go, others: `davidemark`). Never `com.davide`.
 - New git repos: default branch `master`, never `main`. Existing repos keep their branch unless he asks to rename.
