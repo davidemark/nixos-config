@@ -25,7 +25,6 @@
       build-hp = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#hp";
       build-master = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#master";
       build-d3d3 = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#d3d3";
-      build-vm-nix = "sudo nixos-rebuild switch --flake ~/repositories/nixos-config#vm-nix";
     };
   };
 }
