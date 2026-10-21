@@ -47,8 +47,8 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - On claude-rc, every time the LXC starts (boot/reboot) all the standard Claude sessions must be reopened in tmux, each with
   `--remote-control`, so Davide always sees them online in the app. The list of standard sessions (name, folder) is in the
   second-brain note `08-Homelab/00-Homelab.md`, section "Sessioni Claude su claude-rc". Keep that list current when a
-  session is added or removed. A session cannot run before boot by itself: the first Claude session that comes up after a
-  restart checks `tmux ls` and recreates the missing ones (a systemd unit can automate it, only if Davide asks).
+  session is added or removed. A systemd service (`claude-sessions.service`, code in `bash-scripts/claude-rc/`) does it at boot from
+  `/etc/claude-sessions.conf`; to add a session add a line `name|dir` there. If it did not run, `systemctl start claude-sessions`.
 
 ## Code conventions
 - Base package / Maven groupId / namespace: `com.davidemark` (also for C#, Go, others: `davidemark`). Never `com.davide`.
