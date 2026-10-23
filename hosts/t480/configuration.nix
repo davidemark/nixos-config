@@ -47,7 +47,6 @@
 
   # VMs (virt-manager + libvirt), disabled 2026-10-23: only a win98 VM, unused since July.
   # Uncomment these three lines and add "libvirtd" to extraGroups to bring them back.
-  # The VM definition stays in /var/lib/libvirt.
   # virtualisation.libvirtd.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;
   # programs.virt-manager.enable = true;
