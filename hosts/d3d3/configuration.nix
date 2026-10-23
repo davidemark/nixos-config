@@ -11,6 +11,8 @@
     ../../modules/common/portal.nix
   ];
 
+  # Dell OptiPlex 790 USFF (i5 2nd gen, 2011): to check on the machine. Its BIOS boots both
+  # UEFI and Legacy; if it is installed in Legacy mode, use GRUB on the disk like s720.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -23,14 +25,9 @@
 
   services.tailscale.enable = true;
 
-  services.tlp.enable = true;
   services.thermald.enable = true;
 
   security.pam.services.swaylock = {};
-
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
 
   system.stateVersion = "26.05";
 }
