@@ -57,6 +57,7 @@
     distrobox
     dwarf-fortress
     obsidian
+    ollama  # on demand for pinolo: run `ollama serve`, models stay in ~/.ollama
     vesktop
     vscode
   ];
