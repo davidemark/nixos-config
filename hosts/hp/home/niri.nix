@@ -51,7 +51,7 @@
     binds {
         Mod+Return { spawn "foot"; }
         Mod+Space { spawn "fuzzel"; }
-        Mod+B { spawn "brave"; }
+        Mod+B { spawn "brave-origin"; }
         Mod+D { spawn "vesktop"; }
         Mod+G { spawn "steam"; }
         Mod+Shift+G { spawn "heroic"; }
