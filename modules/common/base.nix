@@ -49,7 +49,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    brave
+    brave-origin
     btop
     catppuccin-gtk
     claude-code

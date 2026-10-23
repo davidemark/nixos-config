@@ -57,7 +57,6 @@
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
-    brave-origin
     distrobox
     dwarf-fortress
     mgba
