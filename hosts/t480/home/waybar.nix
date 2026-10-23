@@ -16,7 +16,8 @@
         "custom/sep",
         "bluetooth",
         "custom/sep",
-        "network",
+        "network#ethernet",
+        "network#wifi",
         "custom/sep",
         "battery"
       ],
@@ -63,11 +64,19 @@
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
       },
 
-      "network": {
+      // One module per interface: without "interface", waybar follows the default route with the
+      // lowest metric, which is the static ethernet one even when the cable is unplugged.
+      "network#wifi": {
+        "interface": "wlp3s0",
         "format-wifi": "󰤨 {essid}",
-        "format-ethernet": "󰈀 {ipaddr}",
         "format-disconnected": "󰤭",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}"
+      },
+
+      "network#ethernet": {
+        "interface": "enp0s31f6",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-disconnected": "",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}"
       },
 
