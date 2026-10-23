@@ -51,7 +51,10 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl
+    distrobox
+    dwarf-fortress
     obsidian
+    vesktop
     virt-manager
     vscode
   ];

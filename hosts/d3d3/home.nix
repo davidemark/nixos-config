@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/home/bash.nix
+    ../../modules/home/starship.nix
     ../../modules/home/foot.nix
     ../../modules/home/mako.nix
     ../../modules/home/gtk.nix

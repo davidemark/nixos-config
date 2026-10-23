@@ -37,7 +37,11 @@
   security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
+    distrobox
+    dwarf-fortress
     obsidian
+    qbittorrent
+    vesktop
     vscode
   ];
 
