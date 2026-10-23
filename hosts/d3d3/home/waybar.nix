@@ -58,6 +58,9 @@
         },
         "format": "{icon} {capacity}%",
         "format-charging": "󰂄 {capacity}%",
+        // Plugged in but held by the TLP charge thresholds: the kernel reports "Not charging"
+        "format-plugged": "󰚥 {capacity}%",
+        "format-full": "󰚥 {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
       },
 
