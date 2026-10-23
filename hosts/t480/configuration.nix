@@ -53,6 +53,7 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl
+    bruno
     distrobox
     dwarf-fortress
     obsidian
