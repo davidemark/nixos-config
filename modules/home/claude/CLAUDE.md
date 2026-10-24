@@ -36,6 +36,8 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   text in repo docs). Do not rewrite old mentions unless he asks.
 - Limits: never create accounts or registrations; never do anything that could harm him. Submitting applications,
   sending messages and entering credentials stay his own actions. If a browser site permission is refused, stop and tell him.
+- Never read `.env` files (nor `.env.*`, except `.env.example`), with any tool, `cat` and Bash included. If values from
+  one are needed, ask DavideMark for them or tell him which variables to set. Never print or store secrets.
 - Answer in the language he writes in (Italian or English).
 - Folder names are lowercase (e.g. `~/download`, `~/repositories`). XDG user dirs are managed by `modules/home/xdg-dirs.nix`.
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
