@@ -12,6 +12,7 @@
     ../../modules/home/scripts.nix
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
+    ../../modules/home/ssh.nix
     ./home/niri.nix
     ./home/waybar.nix
   ];
