@@ -47,6 +47,9 @@
   users.users.davidemark = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDLsQmYJl3w+J571izFfLOLTDTi3Bx1QfeXgQkG+eij9 davidemark@t480"
+    ];
   };
 
   services.tailscale.enable = true;
