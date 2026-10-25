@@ -17,6 +17,10 @@
 
   zramSwap.enable = true;
 
+  # Keep kernel errors (e.g. the Bluetooth "Reading supported features failed") off the tty login
+  # screen; they still go to the journal.
+  boot.consoleLogLevel = 3;
+
   programs.niri.enable = true;
   programs.dconf.enable = true;
 
