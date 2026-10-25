@@ -12,8 +12,7 @@
     enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
-        # id_ed25519 for the homelab, id_rsa still used for GitHub
-        identityFile = [ "~/.ssh/id_ed25519" "~/.ssh/id_rsa" ];
+        identityFile = "~/.ssh/id_ed25519";
         addKeysToAgent = "yes";
         serverAliveInterval = 30;
       };
