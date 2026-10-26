@@ -12,6 +12,10 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
    desktop app setting "Connect new sessions to Remote Control"). If it is off, tell DavideMark in one line and explain how to
    enable it (`/config` > "Enable Remote Control for all sessions"). Do not edit `settings.json` through home-manager: it
    would become read-only and Claude Code writes to it. The setting is per machine, so it must be set once on each PC.
+5. Before touching any machine, `nixos-config` or the homelab, read `second-brain/00-Overview/06-Infrastructure.md` and
+   `second-brain/08-Homelab/00-Homelab.md`: they hold the architecture (hosts, IPs, Tailscale, SSH keys and aliases) and the
+   section "Pulizie e verifiche in sospeso". Every temporary file or backup left outside the scratchpad goes in that
+   section, and its line is removed once it is deleted. When the architecture changes, update those notes in the same task.
 
 ## Keep this file current (continuity across PCs)
 - Rules that apply to every machine live HERE or in the second-brain, never only in the local auto-memory
