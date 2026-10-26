@@ -15,6 +15,9 @@
         identityFile = "~/.ssh/id_ed25519";
         addKeysToAgent = "yes";
         serverAliveInterval = 30;
+        # Do not learn extra host keys (RSA, ECDSA) after login: known_hosts keeps only the
+        # ed25519 key accepted the first time.
+        extraOptions.UpdateHostKeys = "no";
       };
 
       homelab = { hostname = "192.168.1.11"; user = "root"; };
