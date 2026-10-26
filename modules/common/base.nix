@@ -46,7 +46,8 @@
     defaultNetwork.settings.dns_enabled = true;
   };
   
-  virtualisation.containers.registries.search = [
+  # Registries tried for short image names (e.g. `podman pull alpine`)
+  virtualisation.containers.registries.settings.unqualified-search-registries = [
     "docker.io"
     "ghcr.io"
     "quay.io"

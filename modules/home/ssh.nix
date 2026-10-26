@@ -10,32 +10,32 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        identityFile = "~/.ssh/id_ed25519";
-        addKeysToAgent = "yes";
-        serverAliveInterval = 30;
+        IdentityFile = "~/.ssh/id_ed25519";
+        AddKeysToAgent = "yes";
+        ServerAliveInterval = 30;
         # Do not learn extra host keys (RSA, ECDSA) after login: known_hosts keeps only the
         # ed25519 key accepted the first time.
-        extraOptions.UpdateHostKeys = "no";
+        UpdateHostKeys = "no";
       };
 
-      homelab = { hostname = "192.168.1.11"; user = "root"; };
-      "homelab-ts" = { hostname = "100.122.210.109"; user = "root"; };
+      homelab = { HostName = "192.168.1.11"; User = "root"; };
+      "homelab-ts" = { HostName = "100.122.210.109"; User = "root"; };
 
       # From the LAN claude-rc may not answer (its Tailscale RouteAll issue, see the vault):
       # use claude-rc-ts until it is fixed.
-      "claude-rc" = { hostname = "192.168.1.12"; user = "root"; };
-      "claude-rc-ts" = { hostname = "100.86.232.108"; user = "root"; };
+      "claude-rc" = { HostName = "192.168.1.12"; User = "root"; };
+      "claude-rc-ts" = { HostName = "100.86.232.108"; User = "root"; };
 
-      zimablade = { hostname = "192.168.1.10"; user = "root"; };
-      "zimablade-ts" = { hostname = "192.168.1.10"; user = "root"; proxyJump = "homelab-ts"; };
+      zimablade = { HostName = "192.168.1.10"; User = "root"; };
+      "zimablade-ts" = { HostName = "192.168.1.10"; User = "root"; ProxyJump = "homelab-ts"; };
 
-      indigo = { hostname = "192.168.1.13"; user = "root"; };
-      "indigo-ts" = { hostname = "192.168.1.13"; user = "root"; proxyJump = "homelab-ts"; };
+      indigo = { HostName = "192.168.1.13"; User = "root"; };
+      "indigo-ts" = { HostName = "192.168.1.13"; User = "root"; ProxyJump = "homelab-ts"; };
 
-      futro = { hostname = "192.168.1.101"; user = "davidemark"; };
-      "futro-ts" = { hostname = "192.168.1.101"; user = "davidemark"; proxyJump = "homelab-ts"; };
+      futro = { HostName = "192.168.1.101"; User = "davidemark"; };
+      "futro-ts" = { HostName = "192.168.1.101"; User = "davidemark"; ProxyJump = "homelab-ts"; };
     };
   };
 }
