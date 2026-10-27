@@ -38,6 +38,10 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   Push only after the commit is approved. Applies to every repo, vault included.
 - Name: in commit messages and in the second-brain notes call the user DavideMark, never "Davide" (also for new
   text in repo docs). Do not rewrite old mentions unless he asks.
+- Todos: everything still to do lives in the second-brain folder `09-Todo/` (one note per category, rules in `09-Todo/00-Todo.md`).
+  When DavideMark asks what is left to do, read those notes instead of answering from memory, and update them first if
+  something changed. When he asks to note something for later, add it right away; when a point is done, remove it and record
+  what was done in the detail note.
 - Limits: never create accounts or registrations; never do anything that could harm him. Submitting applications,
   sending messages and entering credentials stay his own actions. If a browser site permission is refused, stop and tell him.
 - Never read `.env` files (nor `.env.*`, except `.env.example`), with any tool, `cat` and Bash included. If values from
