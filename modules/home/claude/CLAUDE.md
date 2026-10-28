@@ -52,16 +52,21 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
 
 ## Claude sessions (tmux + Remote Control)
-- When DavideMark asks for another Claude session, I create it myself, never leave the steps to him: `tmux new-session -d -s <name>
-  -c <project dir> 'claude --remote-control "<name>" -n "<name>" ["<initial prompt>"]'` (same command for every session, so
-  each one shows online with its name in the Claude app). If it stops at "Do you trust this folder?", I confirm it myself
-  (`tmux send-keys -t <name> Down Enter`) after checking the screen shows that prompt for the folder DavideMark asked for.
-  Then I report the session name and `tmux attach -t <name>`. Standing authorization from DavideMark (2026-10-21).
+- Naming convention for EVERY Claude session (tmux name and `--remote-control` name): `<host>-<session-name>`, where `<host>`
+  is the hostname of the machine the session runs on (e.g. `claude-rc-misc`, `claude-rc-indigo`, `claude-rc-maintenance`,
+  `s720-<name>`). If DavideMark gives only a short name, I add the host prefix myself. Rule from DavideMark (2026-10-28).
+- When DavideMark asks for another Claude session, I create it myself, never leave the steps to him: `tmux new-session -d -s <host>-<name>
+  -c <project dir> 'claude --remote-control "<host>-<name>" -n "<host>-<name>" ["<initial prompt>"]'` (same command for every
+  session, so each one shows online with its name in the Claude app). If it stops at "Do you trust this folder?", I confirm it myself
+  (`tmux send-keys -t <host>-<name> Down Enter`) after checking the screen shows that prompt for the folder DavideMark asked for.
+  Then I report the session name and `tmux attach -t <host>-<name>`. Standing authorization from DavideMark (2026-10-21).
 - On claude-rc, every time the LXC starts (boot/reboot) all the standard Claude sessions must be reopened in tmux, each with
   `--remote-control`, so DavideMark always sees them online in the app. The list of standard sessions (name, folder) is in the
   second-brain note `08-Homelab/00-Homelab.md`, section "Sessioni Claude su claude-rc". Keep that list current when a
   session is added or removed. A systemd service (`claude-sessions.service`, code in `bash-scripts/claude-rc/`) does it at boot from
-  `/etc/claude-sessions.conf`; to add a session add a line `name|dir` there. If it did not run, `systemctl start claude-sessions`.
+  `/etc/claude-sessions.conf`; to add a session add a line `claude-rc-<name>|dir` there. If it did not run, `systemctl start claude-sessions`.
+  From any machine, `crc` (alias, script in `modules/home/scripts.nix`) opens a menu of the claude-rc sessions and attaches
+  over ssh; `crc <name>` attaches directly, `crc -l` lists, `crc --start` recreates the missing ones.
 
 ## Code conventions
 - Base package / Maven groupId / namespace: `com.davidemark` (also for C#, Go, others: `davidemark`). Never `com.davide`.

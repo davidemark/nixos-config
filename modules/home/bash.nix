@@ -11,6 +11,7 @@
       ns = "niri-session";
       ff = "fastfetch";
       cc = "clear";
+      crc = "$HOME/.local/bin/crc";
       la = "ls -lh --color=auto";
       lla = "ls -lah --color=auto";
       grep = "grep --color=auto";

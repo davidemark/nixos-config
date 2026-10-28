@@ -10,6 +10,7 @@
     ../../modules/home/xdg-dirs.nix
     ../../modules/home/lock.nix
     ../../modules/home/scripts.nix
+    ../../modules/home/ssh.nix
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
     ./home/niri.nix
