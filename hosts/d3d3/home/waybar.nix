@@ -10,13 +10,15 @@
       "modules-left": ["niri/workspaces"],
       "modules-center": ["clock"],
       "modules-right": [
+        "cpu",
+        "custom/sep",
+        "memory",
+        "custom/sep",
+        "disk",
+        "custom/sep",
         "pulseaudio",
         "custom/sep",
-        "backlight",
-        "custom/sep",
-        "network",
-        "custom/sep",
-        "battery"
+        "network"
       ],
 
       "custom/sep": {
@@ -49,6 +51,25 @@
           "on-scroll-up": "shift_up",
           "on-scroll-down": "shift_down"
         }
+      },
+
+      "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 3,
+        "tooltip-format": "{avg_frequency} GHz"
+      },
+
+      "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 3,
+        "tooltip-format": "{used:0.1f} / {total:0.1f} GiB\nswap: {swapUsed:0.1f} / {swapTotal:0.1f} GiB"
+      },
+
+      "disk": {
+        "format": "󰋊 {percentage_used}%",
+        "interval": 60,
+        "path": "/",
+        "tooltip-format": "{used} / {total}"
       },
 
       "battery": {
@@ -137,6 +158,21 @@
       color: #c6d0f5;
       font-weight: bold;
       padding: 0 8px;
+    }
+
+    #cpu {
+      color: #85c1dc;
+      padding: 0 6px;
+    }
+
+    #memory {
+      color: #81c8be;
+      padding: 0 6px;
+    }
+
+    #disk {
+      color: #ef9f76;
+      padding: 0 6px;
     }
 
     #battery {
