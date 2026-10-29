@@ -13,9 +13,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
    enable it (`/config` > "Enable Remote Control for all sessions"). Do not edit `settings.json` through home-manager: it
    would become read-only and Claude Code writes to it. The setting is per machine, so it must be set once on each PC.
 5. Before touching any machine, `nixos-config` or the homelab, read `second-brain/00-Overview/06-Infrastructure.md` and
-   `second-brain/08-Homelab/00-Homelab.md`: they hold the architecture (hosts, IPs, Tailscale, SSH keys and aliases) and the
-   section "Pulizie e verifiche in sospeso". Every temporary file or backup left outside the scratchpad goes in that
-   section, and its line is removed once it is deleted. When the architecture changes, update those notes in the same task.
+   `second-brain/08-Homelab/00-Homelab.md` (hub, with links to one note per machine): they hold the architecture (hosts, IPs,
+   Tailscale, SSH keys and aliases). Every temporary file or backup left outside the scratchpad goes in
+   `second-brain/09-Todo/01-Homelab.md`, section "Pulizie e verifiche", and its line is removed once it is deleted. When the architecture changes, update those notes in the same task.
 
 ## Keep this file current (continuity across PCs)
 - Rules that apply to every machine live HERE or in the second-brain, never only in the local auto-memory
@@ -62,7 +62,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   Then I report the session name and `tmux attach -t <host>-<name>`. Standing authorization from DavideMark (2026-10-21).
 - On claude-rc, every time the LXC starts (boot/reboot) all the standard Claude sessions must be reopened in tmux, each with
   `--remote-control`, so DavideMark always sees them online in the app. The list of standard sessions (name, folder) is in the
-  second-brain note `08-Homelab/00-Homelab.md`, section "Sessioni Claude su claude-rc". Keep that list current when a
+  second-brain note `08-Homelab/04-Claude-RC.md`, section "Sessioni Claude su claude-rc (tmux)". Keep that list current when a
   session is added or removed. A systemd service (`claude-sessions.service`, code in `bash-scripts/claude-rc/`) does it at boot from
   `/etc/claude-sessions.conf`; to add a session add a line `claude-rc-<name>|dir` there. If it did not run, `systemctl start claude-sessions`.
   From any machine, `crc` (alias, script in `modules/home/scripts.nix`) opens a menu of the claude-rc sessions and attaches
