@@ -51,6 +51,14 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
 
+## SSH keys and Claude Code updates
+- Every SSH key is ed25519, no RSA anywhere (authorized_keys, GitHub, new keys): one key per device, comment `davidemark@<device>`,
+  passphrase except on claude-rc (it works alone). Never copy private keys. Rule from DavideMark (2026-10-28).
+- Claude Code is updated only when DavideMark expressly asks, or at reboot, never while Claude sessions are open: an update
+  run during open sessions, or interrupted, left claude-rc with a broken binary (2026-10-26/28). The auto-updater is off
+  (`DISABLE_AUTOUPDATER=1`: NixOS packages set it already; on claude-rc it is in `~/.claude/settings.json` under `env`).
+  Never run `npm install -g @anthropic-ai/claude-code` on claude-rc while sessions are running.
+
 ## Claude sessions (tmux + Remote Control)
 - Naming convention for EVERY Claude session (tmux name and `--remote-control` name): `<host>-<session-name>`, where `<host>`
   is the hostname of the machine the session runs on (e.g. `claude-rc-misc`, `claude-rc-indigo`, `claude-rc-maintenance`,

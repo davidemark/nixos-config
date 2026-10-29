@@ -52,6 +52,12 @@
     ];
   };
 
+  # claude-rc (its Claude sessions) can log in as root with its ed25519 key, to power the s720 off
+  # and to work on it without a password.
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXgpPCH+zxH7F0uu5YS2CVxdZAydY4+gUffvFIWFhOY davidemark@claude-rc"
+  ];
+
   services.tailscale.enable = true;
 
   services.tlp.enable = true;

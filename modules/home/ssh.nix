@@ -2,8 +2,9 @@
 
 # SSH client config for the homelab. Each host has two names:
 #   <name>     LAN address, works at home
-#   <name>-ts  through Tailscale, works anywhere. zimablade, indigo and s720 are not in the tailnet,
-#              so they are reached by jumping through the homelab VM.
+#   <name>-ts  through Tailscale (MagicDNS short names, so no Tailscale IP is written in this public
+#              repo), works anywhere. zimablade and indigo are not in the tailnet, so they are
+#              reached by jumping through the homelab VM.
 # Using the subnet route (accept-routes) instead would clash with other networks that also
 # use 192.168.1.0/24.
 {
@@ -21,12 +22,12 @@
       };
 
       homelab = { HostName = "192.168.1.11"; User = "root"; };
-      "homelab-ts" = { HostName = "100.122.210.109"; User = "root"; };
+      "homelab-ts" = { HostName = "homelab"; User = "root"; };
 
       # From the LAN claude-rc may not answer (its Tailscale RouteAll issue, see the vault):
       # use claude-rc-ts until it is fixed.
       "claude-rc" = { HostName = "192.168.1.12"; User = "root"; };
-      "claude-rc-ts" = { HostName = "100.86.232.108"; User = "root"; };
+      "claude-rc-ts" = { HostName = "claude-rc"; User = "root"; };
 
       zimablade = { HostName = "192.168.1.10"; User = "root"; };
       "zimablade-ts" = { HostName = "192.168.1.10"; User = "root"; ProxyJump = "homelab-ts"; };
@@ -35,7 +36,7 @@
       "indigo-ts" = { HostName = "192.168.1.13"; User = "root"; ProxyJump = "homelab-ts"; };
 
       futro = { HostName = "192.168.1.101"; User = "davidemark"; };
-      "futro-ts" = { HostName = "192.168.1.101"; User = "davidemark"; ProxyJump = "homelab-ts"; };
+      "futro-ts" = { HostName = "s720"; User = "davidemark"; };
     };
   };
 }
