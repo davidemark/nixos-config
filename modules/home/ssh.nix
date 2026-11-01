@@ -35,6 +35,11 @@
       indigo = { HostName = "192.168.1.13"; User = "root"; };
       "indigo-ts" = { HostName = "192.168.1.13"; User = "root"; ProxyJump = "homelab-ts"; };
 
+      # PDF delivery to the Indigo bot (indigo-send script): restricted user, its key can only
+      # run "indigo receive" on the LXC.
+      "indigo-send" = { HostName = "192.168.1.13"; User = "indigo-send"; };
+      "indigo-send-ts" = { HostName = "192.168.1.13"; User = "indigo-send"; ProxyJump = "homelab-ts"; };
+
       futro = { HostName = "192.168.1.101"; User = "davidemark"; };
       "futro-ts" = { HostName = "s720"; User = "davidemark"; };
     };
