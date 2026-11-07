@@ -32,8 +32,7 @@
   networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
 
   # Il .link di systemd (wakeOnLan.enable) non basta: a runtime la scheda Realtek restava su "Wake-on: d".
-  # Reimposta il WoL a ogni avvio, dopo la configurazione dell'indirizzo: se parte prima, il driver r8169
-  # azzera di nuovo il WoL quando l'interfaccia sale (visto il 2026-11-06 dopo un risveglio da spento).
+  # Reimposta il WoL a ogni avvio. TLP lo azzerava poco dopo (WOL_DISABLE=Y di default, vedi sotto).
   systemd.services.wol-enp1s0 = {
     description = "Enable Wake-on-LAN on enp1s0";
     after = [ "sys-subsystem-net-devices-enp1s0.device" "network-addresses-enp1s0.service" ];
@@ -62,6 +61,8 @@
   services.tailscale.enable = true;
 
   services.tlp.enable = true;
+  # TLP di default spegne il Wake-on-LAN delle schede di rete: qui serve per il risveglio da spento.
+  services.tlp.settings.WOL_DISABLE = "N";
   services.thermald.enable = true;
 
   security.pam.services.swaylock = {};
