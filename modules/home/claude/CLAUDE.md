@@ -86,7 +86,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
      typed in its input box, do not type into it; tell DavideMark and wait.
   2. Send the request with the context the other session lacks, as a plain request (`tmux send-keys`, then Enter). Say in the
      message that it comes from another session on behalf of DavideMark.
-  3. Read the answer from the session log, not from the screen: the target session writes its work in `session-log` (see below).
+  3. Read the answer from the session log, not from the screen: the target session writes its work in `sessions-log` (see below).
      For a long job, start a background check on today's file of that session (exit when an entry of this request has state
      `completato`, `in attesa di OK` or `bloccato`, or after a time limit) so the result comes back while DavideMark keeps
      talking here. If nothing shows up before the limit, tell him and look at the screen as a fallback.
@@ -97,7 +97,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
      that changes something outside the session without checking with him.
   If the topic is unclear, ask him which session instead of guessing. Short questions are faster asked directly to the owner session.
 
-## Session log (`~/repositories/session-log`)
+## Session log (`~/repositories/sessions-log`)
 - Private repo, one folder per dedicated session (`claude-rc-indigo/`, `claude-rc-cloudflare/`, ...), one file per day
   (`YYYY-MM-DD.md`), created only on a day the session worked or answered a request. Format and examples: its `README.md`.
 - Every dedicated session writes one entry per request in its own file: time, who asked (DavideMark or another session), what
