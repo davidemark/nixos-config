@@ -107,18 +107,19 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - The log repo is committed and pushed by each session on its own, no approval needed. Pull before writing and never edit another
   session's folder.
 
-## Sending PDFs to DavideMark (Indigo bot)
-- Any Claude session, on any host, can send DavideMark a PDF on Telegram through the Indigo bot with
-  `indigo-send [-s <session>] file.pdf` (NixOS hosts: `~/.local/bin/indigo-send`, from `modules/home/scripts.nix`, available
+## Sending PDFs and images to DavideMark (Indigo bot)
+- Any Claude session, on any host, can send DavideMark a PDF, PNG or JPEG on Telegram through the Indigo bot with
+  `indigo-send [-s <session>] file.pdf|file.png|file.jpg` (NixOS hosts: `~/.local/bin/indigo-send`, from `modules/home/scripts.nix`, available
   after the next rebuild; claude-rc: `/usr/local/bin/indigo-send`). The session name defaults to the tmux session name.
   Hosts without a key authorized for the `indigo-send` user (the Mac m2, master) cannot use it: say so instead of trying.
-- The PDF is NOT sent at once. The command prints a **FRASE** (three words) and the bot asks DavideMark to type it. The
+- The file is NOT sent at once. The command prints a **FRASE** (three words) and the bot asks DavideMark to type it. The
   session MUST write that phrase in its own reply to DavideMark (the conversation text, not only the tool output) and say he
   has 10 minutes to type it in the Indigo bot. That is what proves the request comes from the session he is talking to.
   Never invent the phrase, never send it through another channel, never look for a way around the confirmation.
-- Send only a PDF DavideMark asked for or that is the result of the task (max 20 MB, at most 5 requests pending). If the
+- Send only a file DavideMark asked for or that is the result of the task (PDF, PNG or JPEG, checked by content; images arrive as a
+  document, full quality; max 20 MB, at most 5 requests pending). If the
   command prints `errore: ...`, show it to him and do not retry in a loop.
-- How it works, limits and where the code is: second-brain note `08-Homelab/01-Indigo.md`, section "Invio PDF".
+- How it works, limits and where the code is: second-brain note `08-Homelab/01-Indigo.md`, section "Invio PDF" (it covers images too).
 
 ## Code conventions
 - Base package / Maven groupId / namespace: `com.davidemark` (also for C#, Go, others: `davidemark`). Never `com.davide`.
