@@ -116,6 +116,11 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   session MUST write that phrase in its own reply to DavideMark (the conversation text, not only the tool output) and say he
   has 10 minutes to type it in the Indigo bot. That is what proves the request comes from the session he is talking to.
   Never invent the phrase, never send it through another channel, never look for a way around the confirmation.
+  **Routed requests:** if the file is sent by a dedicated session on a request passed by `claude-rc-misc`, the phrase goes to
+  `claude-rc-misc`, the session DavideMark is talking to (decision of DavideMark, 2026-11-10: not an exception, it is how
+  routing works). The dedicated session prints each phrase on its own screen (never in `sessions-log` or in a file) and says in
+  the log only that the send waits for DavideMark; `claude-rc-misc` reads the phrases from the screen and writes them in its
+  reply to him. Phrases are never typed or forwarded anywhere else.
 - Send only a file DavideMark asked for or that is the result of the task (PDF, PNG or JPEG, checked by content; images arrive as a
   document, full quality; max 20 MB, at most 5 requests pending). If the
   command prints `errore: ...`, show it to him and do not retry in a loop.
