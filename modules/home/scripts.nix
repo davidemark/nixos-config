@@ -84,20 +84,21 @@
     '';
   };
 
-  # Sends a PDF to DavideMark through the Indigo Telegram bot. Copy of indigo/client/indigo-send
+  # Sends a PDF or an image (PNG, JPEG) to DavideMark through the Indigo Telegram bot. Copy of indigo/client/indigo-send
   # (private repo): keep the two in sync. See the second-brain note 08-Homelab/01-Indigo.
   home.file.".local/bin/indigo-send" = {
     executable = true;
     text = ''
       #!/bin/bash
-      # Invia un PDF a DavideMark tramite il bot Indigo.
+      # Invia un PDF o un'immagine (PNG, JPEG) a DavideMark tramite il bot Indigo.
       #
-      # Uso: indigo-send [-s sessione] file.pdf
+      # Uso: indigo-send [-s sessione] file.pdf|file.png|file.jpg
       #
-      # Il PDF non parte subito: il bot scrive a DavideMark che c'e' una richiesta e lui deve scrivere nel bot la FRASE
+      # Il file non parte subito: il bot scrive a DavideMark che c'e' una richiesta e lui deve scrivere nel bot la FRASE
       # stampata da questo comando. La frase va comunicata a DavideMark nella risposta della sessione Claude: e' questo che
       # dimostra che la richiesta viene dalla sessione con cui sta parlando. La richiesta scade dopo 10 minuti.
       #
+      # Il tipo si riconosce dal contenuto, non dall'estensione. Arriva come documento, senza compressione di Telegram.
       # Il file viaggia in SSH verso l'utente "indigo-send" di indigo, la cui chiave puo' eseguire solo "indigo receive".
       # Destinazioni provate in ordine (alias SSH): indigo-send (LAN), indigo-send-ts (da fuori casa, passa da homelab).
       # Si possono cambiare con INDIGO_SEND_TARGETS="alias1 alias2".
@@ -110,7 +111,7 @@
              specchio lampada orologio violino tamburo fiore seme radice isola)
 
       usage() {
-          echo "Uso: indigo-send [-s sessione] file.pdf" >&2
+          echo "Uso: indigo-send [-s sessione] file.pdf|file.png|file.jpg" >&2
           exit 2
       }
 
@@ -126,7 +127,11 @@
       file=$1
 
       [ -f "$file" ] || { echo "errore: $file non esiste" >&2; exit 1; }
-      [ "$(head -c5 "$file")" = "%PDF-" ] || { echo "errore: $file non e' un PDF" >&2; exit 1; }
+      magic=$(head -c8 "$file" | od -An -tx1 | tr -d ' \n')
+      case $magic in
+          255044462d*|89504e470d0a1a0a|ffd8ff*) ;;
+          *) echo "errore: $file non e' un PDF, PNG o JPEG" >&2; exit 1 ;;
+      esac
 
       if [ -z "$session" ]; then
           if [ -n "''${TMUX:-}" ]; then
