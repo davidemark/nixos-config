@@ -57,6 +57,10 @@
   # virtualisation.spiceUSBRedirection.enable = true;
   # programs.virt-manager.enable = true;
 
+  # Electron apps (vesktop, vscode, obsidian) use the Wayland backend instead of X11 through
+  # xwayland-satellite, where vesktop showed a black window. Needs a new login to take effect.
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   environment.systemPackages = with pkgs; [
     brightnessctl
     bruno
