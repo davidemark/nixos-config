@@ -56,3 +56,14 @@ sudo nixos-rebuild switch --flake .#t480
 ## Why
 
 Started as a way to stop hand-configuring Linux boxes one at a time and actually trust that every machine matches its own committed config. Rebuilding a machine from scratch (or adding a new one) is now `nixos-rebuild switch --flake .#<host>`.
+
+## Public repo checks
+
+This repo is public, so every clone installs a pre-commit hook that blocks private keys, tokens, plain-text passwords, Tailscale `100.x` addresses, MAC addresses, Wi-Fi names and personal email addresses in the staged diff, and refuses commits that are not authored with the GitHub noreply email.
+
+```bash
+scripts/install-hooks.sh <id>+<user>@users.noreply.github.com   # once per clone
+scripts/check-secrets.sh --all                                   # audit every tracked file
+```
+
+A line that is safe on purpose can carry `secrets-ok` in a comment.
