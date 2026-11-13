@@ -1,11 +1,12 @@
 # Java and Kafka profile for the machines used for coding (t480, s720): jdtls with debugger
-# and JUnit from the editor, google-java-format, kcat. The broker itself is dev/kafka/compose.yaml.
+# and JUnit from the editor, Lombok, google-java-format, kcat. The broker itself is dev/kafka/compose.yaml.
 { config, lib, pkgs, ... }:
 
 let
   cfg = config.my.java;
   debugServer = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server";
   testServer = "${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server";
+  lombokAgent = "${pkgs.lombok}/share/java/lombok.jar";
   kafkaCompose = "~/repositories/nixos-config/dev/kafka/compose.yaml";
 in
 {
@@ -84,7 +85,7 @@ in
             end
 
             jdtls.start_or_attach({
-              cmd = { 'jdtls', '--jvm-arg=-Xmx${cfg.jdtlsXmx}', '-data', workspace },
+              cmd = { 'jdtls', '--jvm-arg=-Xmx${cfg.jdtlsXmx}', '--jvm-arg=-javaagent:${lombokAgent}', '-data', workspace },
               root_dir = root,
               capabilities = require('cmp_nvim_lsp').default_capabilities(),
               init_options = { bundles = bundles },
