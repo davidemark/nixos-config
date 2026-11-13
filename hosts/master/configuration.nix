@@ -41,6 +41,7 @@
     dwarf-fortress
     obsidian
     qbittorrent
+    telegram-desktop
     vesktop
     vscode
   ];
