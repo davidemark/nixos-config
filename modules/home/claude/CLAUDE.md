@@ -31,7 +31,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 ## Working style
 - Do not ask permission on routine work (editing the vault, drafting letters, reading pages he opened).
   Act, then report briefly. Git commits are the exception, see the next rule.
-- Git commits: approval depends on the session. In `claude-rc-misc` (the session that orchestrates the others), before every
+- Git commits: approval depends on the session. In `claude-rc-orchestrator` (the session that orchestrates the others), before every
   commit show DavideMark the commit message and wait for his OK, and push only after it. Every OTHER session commits and
   pushes on its own, without asking (decision of DavideMark, 2026-11-09); it still never force-pushes or rewrites published
   history without his explicit authorization. In every session the messages are simple and descriptive: a short subject line,
@@ -63,7 +63,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 
 ## Claude sessions (tmux + Remote Control)
 - Naming convention for EVERY Claude session (tmux name and `--remote-control` name): `<host>-<session-name>`, where `<host>`
-  is the hostname of the machine the session runs on (e.g. `claude-rc-misc`, `claude-rc-indigo`, `claude-rc-maintenance`,
+  is the hostname of the machine the session runs on (e.g. `claude-rc-orchestrator`, `claude-rc-indigo`, `claude-rc-maintenance`,
   `s720-<name>`). If DavideMark gives only a short name, I add the host prefix myself. Rule from DavideMark (2026-10-28).
 - When DavideMark asks for another Claude session, I create it myself, never leave the steps to him: `tmux new-session -d -s <host>-<name>
   -c <project dir> 'claude --remote-control "<host>-<name>" -n "<host>-<name>" ["<initial prompt>"]'` (same command for every
@@ -80,7 +80,7 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - Where a new session opens: agree it with DavideMark before creating it. Default `/root/repositories`, so the session sees every
   repo (second-brain, my-cv, the project) as sibling folders; a single repo folder only when it must work on that repo alone.
 - Routing requests to the dedicated session (decision of DavideMark, 2026-11-09): he may write to one session (usually
-  `claude-rc-misc`) and expect the request to reach the session that owns the topic (e.g. a feature for the Indigo bot goes to
+  `claude-rc-orchestrator`) and expect the request to reach the session that owns the topic (e.g. a feature for the Indigo bot goes to
   `claude-rc-indigo`). The session that received the request does the passing, also for long jobs:
   1. Check the target session first (`tmux capture-pane -p -t <session>`): if it is busy, asking for an approval or has text
      typed in its input box, do not type into it; tell DavideMark and wait.
@@ -116,10 +116,10 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   session MUST write that phrase in its own reply to DavideMark (the conversation text, not only the tool output) and say he
   has 10 minutes to type it in the Indigo bot. That is what proves the request comes from the session he is talking to.
   Never invent the phrase, never send it through another channel, never look for a way around the confirmation.
-  **Routed requests:** if the file is sent by a dedicated session on a request passed by `claude-rc-misc`, the phrase goes to
-  `claude-rc-misc`, the session DavideMark is talking to (decision of DavideMark, 2026-11-10: not an exception, it is how
+  **Routed requests:** if the file is sent by a dedicated session on a request passed by `claude-rc-orchestrator`, the phrase goes to
+  `claude-rc-orchestrator`, the session DavideMark is talking to (decision of DavideMark, 2026-11-10: not an exception, it is how
   routing works). The dedicated session prints each phrase on its own screen (never in `sessions-log` or in a file) and says in
-  the log only that the send waits for DavideMark; `claude-rc-misc` reads the phrases from the screen and writes them in its
+  the log only that the send waits for DavideMark; `claude-rc-orchestrator` reads the phrases from the screen and writes them in its
   reply to him. Phrases are never typed or forwarded anywhere else.
 - Send only a file DavideMark asked for or that is the result of the task (PDF, PNG or JPEG, checked by content; images arrive as a
   document, full quality; max 20 MB, at most 5 requests pending). If the

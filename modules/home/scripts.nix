@@ -30,13 +30,13 @@
   };
 
   # Opens the Claude sessions running on claude-rc. Naming convention for every Claude session:
-  # <host>-<session-name>, so on claude-rc: claude-rc-misc, claude-rc-indigo, claude-rc-maintenance.
+  # <host>-<session-name>, so on claude-rc: claude-rc-orchestrator, claude-rc-indigo, claude-rc-maintenance.
   home.file.".local/bin/crc" = {
     executable = true;
     text = ''
       #!/usr/bin/env bash
       # crc            menu with the Claude sessions on claude-rc, then attach
-      # crc <name>     attach to a session (crc misc = claude-rc-misc)
+      # crc <name>     attach to a session (crc orchestrator = claude-rc-orchestrator)
       # crc -l         list the sessions
       # crc --start    recreate the missing sessions (systemctl restart claude-sessions)
       # Detach with Ctrl+b d. Needs the ssh alias claude-rc-ts (modules/home/ssh.nix) and a key
