@@ -12,6 +12,7 @@
     ../../modules/home/scripts.nix
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
+    ../../modules/home/java-dev.nix
     ../../modules/home/ssh.nix
     ./home/niri.nix
     ./home/waybar.nix
@@ -21,4 +22,6 @@
   home.homeDirectory = "/home/davidemark";
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
+
+  my.java.jdtlsXmx = "2g";
 }

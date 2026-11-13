@@ -1,0 +1,36 @@
+# Local Kafka broker (KRaft, one node, no ZooKeeper) for learning. Off by default: `kafka-up` / `kafka-down`.
+#   host clients (kcat, Spring, ...):  localhost:29092
+#   containers on this compose network: kafka:9092
+# Data is not kept: `kafka-down` removes the broker and its topics.
+services:
+  kafka:
+    image: docker.io/apache/kafka:3.9.0
+    container_name: kafka
+    ports:
+      - "127.0.0.1:29092:29092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: HOST://:29092,INTERNAL://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: HOST://localhost:29092,INTERNAL://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,HOST:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_HEAP_OPTS: -Xms256m -Xmx512m
+
+  # Web UI, only with `kafka-ui-up` (profile "ui"): http://localhost:8080
+  kafka-ui:
+    image: docker.io/provectuslabs/kafka-ui:latest
+    profiles: ["ui"]
+    depends_on:
+      - kafka
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092

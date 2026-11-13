@@ -13,6 +13,7 @@
     ../../modules/home/ssh.nix
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
+    ../../modules/home/java-dev.nix
     ./home/niri.nix
     ./home/waybar.nix
   ];
@@ -21,5 +22,8 @@
   home.homeDirectory = "/home/davidemark";
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
+
+  # 4 GB of RAM: leave room for Maven, the app under test and the browser
+  my.java.jdtlsXmx = "1g";
 
 }
