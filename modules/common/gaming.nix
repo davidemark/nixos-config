@@ -16,6 +16,5 @@
     mangohud
     mgba
     openmw
-    prismlauncher
   ];
 }

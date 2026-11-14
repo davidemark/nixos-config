@@ -41,6 +41,7 @@
     distrobox
     dwarf-fortress
     obsidian
+    prismlauncher
     qbittorrent
     vesktop
   ];
