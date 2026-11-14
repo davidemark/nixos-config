@@ -116,9 +116,6 @@
       # Autopairs — chiude automaticamente parentesi, virgolette, ecc.
       nvim-autopairs.enable = true;
 
-      # Commenti — gcc per commentare una riga, gc in visual mode
-      comment.enable = true;
-
       # Statusline minimale
       lualine = {
         enable = true;
