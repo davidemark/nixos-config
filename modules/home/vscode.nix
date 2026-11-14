@@ -1,5 +1,5 @@
 # VS Code and its extensions, the same on every host that has VS Code (t480, master).
-# A new extension goes in this one list. s720 has no VS Code (few resources).
+# A new extension goes in this one list. VS Code only on t480 and master: s720 and hp do not have it.
 { pkgs, ... }:
 
 {
