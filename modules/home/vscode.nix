@@ -12,6 +12,16 @@
       jnoortheen.nix-ide
       ritwickdey.liveserver
       vscodevim.vim
+      # Extension Pack for Java: in nixpkgs it is only the pack itself (VS Code installs a pack's
+      # members from the marketplace, a declared extension does not), so the members are listed
+      # one by one. Needs a JDK on PATH: jdk21 comes from modules/common/dev.nix on every host.
+      vscjava.vscode-java-pack
+      redhat.java
+      vscjava.vscode-java-debug
+      vscjava.vscode-java-test
+      vscjava.vscode-java-dependency
+      vscjava.vscode-maven
+      vscjava.vscode-gradle
     ];
     # Installed by hand from the editor, not in nixpkgs, so not declarable (list them here when
     # reinstalling or setting up another host; add Java/Spring/Kafka ones that stay manual):
@@ -19,7 +29,10 @@
     #
     # The Mac m2 (not NixOS) also has VS Code, with extensions installed by hand
     # (`code --install-extension <id>`). Reference list for it, declared + manual:
-    #   jnoortheen.nix-ide, ritwickdey.liveserver, vscodevim.vim, vintharas.learn-vim
+    #   jnoortheen.nix-ide, ritwickdey.liveserver, vscodevim.vim, vintharas.learn-vim,
+    #   vscjava.vscode-java-pack, redhat.java, vscjava.vscode-java-debug, vscjava.vscode-java-test,
+    #   vscjava.vscode-java-dependency, vscjava.vscode-maven, vscjava.vscode-gradle
+    # (a JDK is needed on the Mac too for the Java extensions)
     # Keep this list equal to the one above when an extension is added.
   };
 }
