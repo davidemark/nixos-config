@@ -58,6 +58,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   is not in nixpkgs is noted in the comment of the same file and in the vault (`06-Infrastructure`).
   The Mac m2 (not NixOS) is included too: DavideMark installs the same extensions there by hand, from the reference list in the
   comment of `modules/home/vscode.nix` and in the vault; keep both lists equal when an extension is added.
+- Telegram Desktop: same host rule as VS Code: every NixOS host has it except s720 and hp (decision of DavideMark, 2026-11-14). It is
+  declared once in `modules/common/telegram.nix`, imported by each host that has it (today t480, master, d3d3; a new NixOS host
+  imports it too). Whether the Mac m2 has it is up to DavideMark.
 
 ## SSH keys and Claude Code updates
 - Every SSH key is ed25519, no RSA anywhere (authorized_keys, GitHub, new keys): one key per device, comment `davidemark@<device>`,
