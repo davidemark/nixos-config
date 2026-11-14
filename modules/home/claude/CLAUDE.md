@@ -56,6 +56,8 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   DavideMark, 2026-11-14). The extensions are declared once in `modules/home/vscode.nix`, imported by each host that has it
   (today t480, master, d3d3; a new NixOS host imports it too). A new extension goes in that list, never in a single host; one that
   is not in nixpkgs is noted in the comment of the same file and in the vault (`06-Infrastructure`).
+  The Mac m2 (not NixOS) is included too: DavideMark installs the same extensions there by hand, from the reference list in the
+  comment of `modules/home/vscode.nix` and in the vault; keep both lists equal when an extension is added.
 
 ## SSH keys and Claude Code updates
 - Every SSH key is ed25519, no RSA anywhere (authorized_keys, GitHub, new keys): one key per device, comment `davidemark@<device>`,

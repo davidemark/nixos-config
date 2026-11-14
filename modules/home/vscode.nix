@@ -16,5 +16,10 @@
     # Installed by hand from the editor, not in nixpkgs, so not declarable (list them here when
     # reinstalling or setting up another host; add Java/Spring/Kafka ones that stay manual):
     #   vintharas.learn-vim 0.0.28
+    #
+    # The Mac m2 (not NixOS) also has VS Code, with extensions installed by hand
+    # (`code --install-extension <id>`). Reference list for it, declared + manual:
+    #   jnoortheen.nix-ide, ritwickdey.liveserver, vscodevim.vim, vintharas.learn-vim
+    # Keep this list equal to the one above when an extension is added.
   };
 }
