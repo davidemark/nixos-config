@@ -66,16 +66,6 @@
         };
       };
 
-      # Oil — file explorer
-      oil = {
-        enable = true;
-        settings = {
-          default_file_explorer = true;
-          delete_to_trash = true;
-          view_options.show_hidden = true;
-        };
-      };
-
       # LSP
       lsp = {
         enable = true;
@@ -173,8 +163,8 @@
       { mode = "n"; key = "<leader>w"; action = ":w<CR>"; }
       { mode = "n"; key = "<leader>q"; action = ":q<CR>"; }
 
-      # Oil
-      { mode = "n"; key = "-"; action = "<CMD>Oil<CR>"; options.desc = "Open parent directory"; }
+      # File explorer: netrw (built in)
+      { mode = "n"; key = "-"; action = "<CMD>Explore<CR>"; options.desc = "Open parent directory (netrw)"; }
 
       # LSP
       { mode = "n"; key = "gd"; action = "<cmd>lua vim.lsp.buf.definition()<CR>"; options.desc = "Go to definition"; }

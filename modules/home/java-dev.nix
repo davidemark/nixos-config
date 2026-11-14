@@ -1,5 +1,5 @@
 # Java and Kafka profile for the machines used for coding (t480, s720): jdtls with debugger
-# and JUnit from the editor, Lombok, google-java-format. The broker and the demo project live in the playground-java repo.
+# and JUnit from the editor, Lombok, formatting by jdtls. The broker and the demo project live in the playground-java repo.
 { config, lib, pkgs, ... }:
 
 let
@@ -29,16 +29,9 @@ in
       # lspconfig entry from neovim.nix is switched off here.
       plugins.lsp.servers.jdtls.enable = lib.mkForce false;
       extraPlugins = [ pkgs.vimPlugins.nvim-jdtls ];
-      extraPackages = [ pkgs.jdt-language-server pkgs.google-java-format ];
+      extraPackages = [ pkgs.jdt-language-server ];
 
       plugins.dap.enable = true;
-      plugins.dap-ui.enable = true;
-      plugins.dap-virtual-text.enable = true;
-
-      plugins.conform-nvim = {
-        enable = true;
-        settings.formatters_by_ft.java = [ "google-java-format" ];
-      };
 
       keymaps = [
         { mode = "n"; key = "<F5>"; action = "<cmd>lua require('dap').continue()<CR>"; options.desc = "Debug: continue/start"; }
@@ -47,20 +40,15 @@ in
         { mode = "n"; key = "<F12>"; action = "<cmd>lua require('dap').step_out()<CR>"; options.desc = "Debug: step out"; }
         { mode = "n"; key = "<leader>db"; action = "<cmd>lua require('dap').toggle_breakpoint()<CR>"; options.desc = "Debug: toggle breakpoint"; }
         { mode = "n"; key = "<leader>dB"; action = "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Condition: '))<CR>"; options.desc = "Debug: conditional breakpoint"; }
-        { mode = "n"; key = "<leader>du"; action = "<cmd>lua require('dapui').toggle()<CR>"; options.desc = "Debug: toggle UI"; }
+        { mode = "n"; key = "<leader>dh"; action = "<cmd>lua require('dap.ui.widgets').hover()<CR>"; options.desc = "Debug: value under cursor"; }
+        { mode = "n"; key = "<leader>ds"; action = "<cmd>lua local w = require('dap.ui.widgets'); w.centered_float(w.scopes)<CR>"; options.desc = "Debug: variables in scope"; }
         { mode = "n"; key = "<leader>dr"; action = "<cmd>lua require('dap').repl.toggle()<CR>"; options.desc = "Debug: REPL"; }
         { mode = "n"; key = "<leader>dl"; action = "<cmd>lua require('dap').run_last()<CR>"; options.desc = "Debug: run last"; }
         { mode = "n"; key = "<leader>dx"; action = "<cmd>lua require('dap').terminate()<CR>"; options.desc = "Debug: stop"; }
-        { mode = "n"; key = "<leader>cf"; action = "<cmd>lua require('conform').format({ async = true, lsp_format = 'fallback' })<CR>"; options.desc = "Format file"; }
+        { mode = "n"; key = "<leader>cf"; action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>"; options.desc = "Format file (jdtls)"; }
       ];
 
       extraConfigLua = ''
-        -- open and close the debug UI together with the debug session
-        local dap, dapui = require('dap'), require('dapui')
-        dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
-        dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
-        dap.listeners.before.event_exited['dapui_config'] = function() dapui.close() end
-
         -- Java: jdtls + java-debug + java-test, one server per project
         vim.api.nvim_create_autocmd('FileType', {
           pattern = 'java',
