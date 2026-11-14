@@ -103,9 +103,6 @@
       cmp-buffer.enable = true;
       cmp-path.enable = true;
 
-      # Autopairs — chiude automaticamente parentesi, virgolette, ecc.
-      nvim-autopairs.enable = true;
-
       # Statusline minimale
       lualine = {
         enable = true;
