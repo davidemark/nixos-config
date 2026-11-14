@@ -36,5 +36,8 @@
       ritwickdey.liveserver
       vscodevim.vim
     ];
+    # Installed by hand from the editor, not in nixpkgs, so not declarable (list them here when
+    # reinstalling or setting up another host; add Java/Spring/Kafka ones that stay manual):
+    #   vintharas.learn-vim 0.0.28
   };
 }
