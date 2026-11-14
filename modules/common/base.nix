@@ -64,6 +64,7 @@
     git
     imv
     lazygit
+    libarchive  # bsdtar: reads and writes zip, tar, 7z (bsdtar -a -cf x.zip dir)
     mako
     nchat
     neovim
