@@ -13,6 +13,7 @@
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
     ../../modules/home/java-dev.nix
+    ../../modules/home/vscode.nix
     ../../modules/home/ssh.nix
     ./home/niri.nix
     ./home/waybar.nix
@@ -24,20 +25,4 @@
   programs.home-manager.enable = true;
 
   my.java.jdtlsXmx = "2g";
-
-  # VS Code with the extensions already installed by hand. The extensions folder stays writable:
-  # home-manager only adds one symlink per extension below, so extensions installed from the
-  # editor (for example learn-vim, which is not in nixpkgs) keep working.
-  programs.vscode = {
-    enable = true;
-    mutableExtensionsDir = true;
-    profiles.default.extensions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-      ritwickdey.liveserver
-      vscodevim.vim
-    ];
-    # Installed by hand from the editor, not in nixpkgs, so not declarable (list them here when
-    # reinstalling or setting up another host; add Java/Spring/Kafka ones that stay manual):
-    #   vintharas.learn-vim 0.0.28
-  };
 }

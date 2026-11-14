@@ -43,7 +43,6 @@
     qbittorrent
     telegram-desktop
     vesktop
-    vscode
   ];
 
   system.stateVersion = "26.05";

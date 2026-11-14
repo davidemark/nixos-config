@@ -52,6 +52,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - Folder names are lowercase (e.g. `~/download`, `~/repositories`). XDG user dirs are managed by `modules/home/xdg-dirs.nix`.
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
+- VS Code: every host that has VS Code gets the same extensions (decision of DavideMark, 2026-11-14). They are declared once in
+  `modules/home/vscode.nix`, imported by each such host (today t480 and master; s720 has none). A new extension goes in that list,
+  never in a single host; one that is not in nixpkgs is noted in the comment of the same file and in the vault (`06-Infrastructure`).
 
 ## SSH keys and Claude Code updates
 - Every SSH key is ed25519, no RSA anywhere (authorized_keys, GitHub, new keys): one key per device, comment `davidemark@<device>`,
