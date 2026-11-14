@@ -1,5 +1,5 @@
-# VS Code and its extensions, the same on every host that has VS Code (t480, master).
-# A new extension goes in this one list. VS Code only on t480 and master: s720 and hp do not have it.
+# VS Code and its extensions, the same on every NixOS host except s720 and hp (t480, master, d3d3).
+# A new extension goes in this one list. Every host imports this module; only s720 (few resources) and hp must not.
 { pkgs, ... }:
 
 {
