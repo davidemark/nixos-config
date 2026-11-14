@@ -1,5 +1,5 @@
 # Java and Kafka profile for the machines used for coding (t480, s720): jdtls with debugger
-# and JUnit from the editor, Lombok, google-java-format, kcat. The broker and the demo project live in the playground-java repo.
+# and JUnit from the editor, Lombok, google-java-format. The broker and the demo project live in the playground-java repo.
 { config, lib, pkgs, ... }:
 
 let
@@ -17,10 +17,6 @@ in
   };
 
   config = {
-    home.packages = with pkgs; [
-      kcat
-    ];
-
     # Start the broker only when needed: `kafka-up`, `kafka-ui-up`, `kafka-down` (see playground-java/kafka/README.md)
     programs.bash.shellAliases = {
       kafka-up = "podman-compose -f ${kafkaCompose} up -d";
