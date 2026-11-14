@@ -1,5 +1,5 @@
 # Java and Kafka profile for the machines used for coding (t480, s720): jdtls with debugger
-# and JUnit from the editor, Lombok, google-java-format, kcat. The broker and the demo project live in the java-playground repo.
+# and JUnit from the editor, Lombok, google-java-format, kcat. The broker and the demo project live in the playground-java repo.
 { config, lib, pkgs, ... }:
 
 let
@@ -7,7 +7,7 @@ let
   debugServer = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server";
   testServer = "${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server";
   lombokAgent = "${pkgs.lombok}/share/java/lombok.jar";
-  kafkaCompose = "~/repositories/java-playground/kafka/compose.yaml";
+  kafkaCompose = "~/repositories/playground-java/kafka/compose.yaml";
 in
 {
   options.my.java.jdtlsXmx = lib.mkOption {
@@ -21,7 +21,7 @@ in
       kcat
     ];
 
-    # Start the broker only when needed: `kafka-up`, `kafka-ui-up`, `kafka-down` (see java-playground/kafka/README.md)
+    # Start the broker only when needed: `kafka-up`, `kafka-ui-up`, `kafka-down` (see playground-java/kafka/README.md)
     programs.bash.shellAliases = {
       kafka-up = "podman-compose -f ${kafkaCompose} up -d";
       kafka-ui-up = "podman-compose -f ${kafkaCompose} --profile ui up -d";
