@@ -14,7 +14,7 @@
       vscodevim.vim
       # Extension Pack for Java: in nixpkgs it is only the pack itself (VS Code installs a pack's
       # members from the marketplace, a declared extension does not), so the members are listed
-      # one by one. Needs a JDK on PATH: jdk21 comes from modules/common/dev.nix on every host.
+      # one by one. Needs a JDK on PATH: jdk25 comes from modules/common/dev.nix on every host.
       vscjava.vscode-java-pack
       redhat.java
       vscjava.vscode-java-debug
