@@ -15,6 +15,7 @@
     ../../modules/home/vscode.nix
     ./home/niri.nix
     ./home/waybar.nix
+    ../../modules/home/waybar-style.nix
   ];
 
   home.username = "davidemark";
