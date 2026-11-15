@@ -47,8 +47,11 @@
   users.users.davidemark = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+    # claude-rc (its Claude sessions) can also log in as this user, without port, agent or X11 forwarding. No
+    # root and no passwordless sudo. No `from=` on purpose: a Tailscale 100.x address does not go in this public repo.
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDLsQmYJl3w+J571izFfLOLTDTi3Bx1QfeXgQkG+eij9 davidemark@t480"
+      "no-port-forwarding,no-agent-forwarding,no-X11-forwarding ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXgpPCH+zxH7F0uu5YS2CVxdZAydY4+gUffvFIWFhOY davidemark@claude-rc"
     ];
   };
 
