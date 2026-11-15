@@ -3,7 +3,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "catppuccin-frappe-blue-standard+default";
+      name = "catppuccin-frappe-blue-standard";
       package = pkgs.catppuccin-gtk;
     };
     iconTheme = {
