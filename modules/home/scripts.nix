@@ -225,13 +225,15 @@
       # nix-clean -y     no question
       set -u
       sys=/nix/var/nix/profiles/system
-      hm="$HOME/.local/state/nix/profiles/home-manager"
 
       cur=$(readlink "$sys" | sed -n 's/^system-\([0-9]*\)-link$/\1/p')
       [ -n "$cur" ] || { echo "errore: generazione corrente non trovata"; exit 1; }
-      prev=$(nix-env --list-generations -p "$sys" | awk -v c="$cur" '$1 < c {p = $1} END {print p}')
+      # Generation numbers from the profile links: `nix-env --list-generations` as a normal user
+      # tries to take the profile write lock and fails with "Permission denied".
+      nums=$(for l in "$sys"-*-link; do n=''${l##*/system-}; echo "''${n%-link}"; done | sort -n)
+      prev=$(echo "$nums" | awk -v c="$cur" '$1 < c {p = $1} END {print p}')
       keep="$cur''${prev:+ $prev}"
-      gone=$(nix-env --list-generations -p "$sys" | awk -v c="$cur" -v p="''${prev:-0}" '$1 < c && $1 != p {printf "%s ", $1}')
+      gone=$(echo "$nums" | awk -v c="$cur" -v p="''${prev:-0}" '$1 < c && $1 != p {printf "%s ", $1}')
 
       echo "Generazione in uso: $cur, precedente (rollback): ''${prev:-nessuna}. Restano: $keep"
       if [ -z "$gone" ]; then echo "Generazioni di sistema da togliere: nessuna"; else echo "Generazioni di sistema da togliere: $gone"; fi
@@ -246,7 +248,8 @@
 
       # +2 counts back from the generation in use: it keeps that one and the one before it
       sudo nix-env --delete-generations +2 -p "$sys" || exit 1
-      if [ -e "$hm" ]; then nix-env --delete-generations +2 -p "$hm"; fi
+      # No separate home-manager generations: it is a NixOS module here (useUserPackages), so its
+      # state is part of each system generation and goes with it.
       sudo nix-collect-garbage
       # Rewrite the boot entries from the generations that are left. No rebuild: no new generation
       # and no change to what runs.
