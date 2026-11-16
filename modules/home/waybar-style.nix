@@ -29,7 +29,7 @@
     }
 
     #workspaces button {
-      padding: 0 8px;
+      padding: 0;
       color: #626880;
       background: transparent;
       transition: all 0.2s ease;
@@ -127,14 +127,18 @@
       margin: 0;
     }
 
+    /* The space around the number is on the label, not on the button: the button is exactly as wide
+       as its label, so the line under the active workspace is centred on the number. (Padding on the
+       button plus min-width left the label packed at the start of a wider box.) */
     #workspaces button label {
-      padding: 0;
+      min-width: 16px;
+      padding: 0 8px;
       margin: 0;
       background: transparent;
     }
 
     #workspaces button {
-      min-width: 16px;
+      min-width: 0;
       margin: 0;
       box-shadow: none;
       text-shadow: none;
