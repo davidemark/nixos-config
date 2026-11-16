@@ -46,6 +46,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   what was done in the detail note.
 - Limits: never create accounts or registrations; never do anything that could harm him. Submitting applications,
   sending messages and entering credentials stay his own actions. If a browser site permission is refused, stop and tell him.
+- Wallpapers (rule from DavideMark, 2026-11-16, every session): never read or list the content of the wallpaper folders. Only folder
+  names and the structure (e.g. `1920x1080`, `3440x1440`, `safe`, `unsafe`) and counts, never the image file names; do not write
+  them anywhere (log, vault, commits, messages, code comments, README).
 - Never read `.env` files (nor `.env.*`, except `.env.example`), with any tool, `cat` and Bash included. If values from
   one are needed, ask DavideMark for them or tell him which variables to set. Never print or store secrets.
 - Answer in the language he writes in (Italian or English).
