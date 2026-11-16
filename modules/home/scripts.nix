@@ -2,11 +2,6 @@
 # in ~/.local/bin.
 { config, pkgs, ... }:
 {
-  home.file.".local/bin/cycle-wallpaper.sh" = {
-    executable = true;
-    source = ../../scripts/home/cycle-wallpaper.sh;
-  };
-
   # Opens the Claude sessions running on claude-rc. Naming convention for every Claude session:
   # <host>-<session-name>, so on claude-rc: claude-rc-orchestrator, claude-rc-indigo, claude-rc-maintenance.
   home.file.".local/bin/crc" = {

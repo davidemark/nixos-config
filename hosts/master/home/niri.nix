@@ -41,7 +41,7 @@
 
     spawn-at-startup "waybar"
     spawn-at-startup "mako"
-    spawn-sh-at-startup "sleep 1 && swaybg -i $(find ~/repositories/wallpapers/1920x1080/safe -type f | sort | head -1) -m fill"
+    spawn-sh-at-startup "sleep 1 && ~/.local/bin/wallpaper start"
 
     binds {
         Mod+Return { spawn "foot"; }
@@ -56,8 +56,8 @@
         Mod+Shift+E { quit; }
         Mod+Escape { spawn "swaylock"; }
 
-        Mod+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/safe"; }
-        Mod+Shift+W { spawn "sh" "-c" "~/.local/bin/cycle-wallpaper.sh ~/repositories/wallpapers/1920x1080/unsafe"; }
+        Mod+W { spawn "sh" "-c" "~/.local/bin/wallpaper next safe"; }
+        Mod+Shift+W { spawn "sh" "-c" "~/.local/bin/wallpaper next unsafe"; }
 
         Mod+H { focus-column-left; }
         Mod+L { focus-column-right; }
