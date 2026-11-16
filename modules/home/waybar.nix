@@ -1,5 +1,5 @@
 # Waybar config, one module for every host (style: waybar-style.nix). Same layout everywhere:
-#   workspaces | clock | [brightness] volume [microphone] [bluetooth] [network] [battery] [temperature]
+#   workspaces | clock | [brightness] volume [microphone] [bluetooth] [network] [temperature] [battery]
 # Modules that depend on the hardware are switched on per host with my.waybar.*. CPU, memory and
 # disk are not in the bar: the Mod+I popup (sysinfo-popup, scripts.nix) shows them for a few seconds.
 { config, lib, ... }:
@@ -21,8 +21,8 @@ let
         lib.optional (cfg.ethernetInterface != null) "network#ethernet"
         ++ lib.optional (cfg.wifiInterface != null) "network#wifi"
     )
-    (lib.optional cfg.battery "battery")
     (lib.optional cfg.temperature "temperature")
+    (lib.optional cfg.battery "battery")
   ];
 
   # A separator between modules, but none between the ethernet and the wifi icon.
