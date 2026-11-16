@@ -13,7 +13,7 @@
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
     ./home/niri.nix
-    ./home/waybar.nix
+    ../../modules/home/waybar.nix
     ../../modules/home/waybar-style.nix
   ];
 
@@ -21,4 +21,12 @@
   home.homeDirectory = "/home/davidemark";
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
+
+  # Interfaces not verified yet: one generic network module; temperature left off until checked
+  my.waybar = {
+    backlight = true;
+    microphone = true;
+    bluetooth = true;
+    battery = true;
+  };
 }

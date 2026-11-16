@@ -16,6 +16,9 @@
       default-timeout = 5000;
     };
     extraConfig = ''
+      [app-name=sysinfo]
+      height=220
+
       [urgency=low]
       border-color=#a6d189dd
 

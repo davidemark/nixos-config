@@ -87,6 +87,7 @@
         Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
         Mod+O { toggle-overview; }
+        Mod+I { spawn "sh" "-c" "~/.local/bin/sysinfo-popup"; }
 
         Mod+BracketLeft  { consume-or-expel-window-left; }
         Mod+BracketRight { consume-or-expel-window-right; }

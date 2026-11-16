@@ -1,5 +1,4 @@
-# Waybar style, one copy for every host. The modules (config.jsonc) differ per host and stay in
-# hosts/<host>/home/waybar.nix.
+# Waybar style, one copy for every host. The modules (config.jsonc) come from waybar.nix.
 { ... }:
 
 {

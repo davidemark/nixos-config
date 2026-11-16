@@ -16,7 +16,7 @@
     ../../modules/home/vscode.nix
     ../../modules/home/ssh.nix
     ./home/niri.nix
-    ./home/waybar.nix
+    ../../modules/home/waybar.nix
     ../../modules/home/waybar-style.nix
   ];
 
@@ -26,4 +26,14 @@
   programs.home-manager.enable = true;
 
   my.java.jdtlsXmx = "2g";
+
+  my.waybar = {
+    backlight = true;
+    microphone = true;
+    bluetooth = true;
+    battery = true;
+    temperature = true;
+    wifiInterface = "wlp3s0";
+    ethernetInterface = "enp0s31f6";
+  };
 }

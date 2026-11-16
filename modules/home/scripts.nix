@@ -177,4 +177,36 @@
       EOF
     '';
   };
+
+  # Mod+I: CPU, memory, disk (and battery/temperature where the PC has them) as a mako popup for a
+  # few seconds. They are not in the waybar any more. The fixed id makes a second press replace it.
+  home.file.".local/bin/sysinfo-popup" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      read -r _ u1 n1 s1 i1 w1 q1 sq1 _ < /proc/stat
+      sleep 0.5
+      read -r _ u2 n2 s2 i2 w2 q2 sq2 _ < /proc/stat
+      t1=$((u1 + n1 + s1 + i1 + w1 + q1 + sq1)); t2=$((u2 + n2 + s2 + i2 + w2 + q2 + sq2))
+      cpu=$(( 100 * ((t2 - t1) - (i2 + w2 - i1 - w1)) / (t2 - t1) ))
+
+      mem=$(free -h | awk '/^Mem:/ {print $3 " / " $2}')
+      swap=$(free -h | awk '/^Swap:/ {print $3 " / " $2}')
+      disk=$(df -h --output=used,size,pcent / | awk 'NR==2 {print $1 " / " $2 " (" $3 ")"}')
+
+      body="󰻠 CPU  $cpu%\n󰍛 RAM  $mem\n󰍛 swap  $swap\n󰋊 disk  $disk"
+
+      for b in /sys/class/power_supply/BAT*; do
+        [ -r "$b/capacity" ] || continue
+        body="$body\n󰁹 battery  $(cat "$b/capacity")% ($(cat "$b/status"))"
+        break
+      done
+      if [ -r /sys/class/thermal/thermal_zone0/temp ]; then
+        body="$body\n󰔏 temp  $(( $(cat /sys/class/thermal/thermal_zone0/temp) / 1000 ))°C"
+      fi
+
+      exec ${pkgs.libnotify}/bin/notify-send -a sysinfo -t 8000 \
+        -h string:x-canonical-private-synchronous:sysinfo "System" "$(printf '%b' "$body")"
+    '';
+  };
 }
