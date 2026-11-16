@@ -1,261 +1,39 @@
+# The scripts are plain files in scripts/home/ (shellcheck works on them); this module installs them
+# in ~/.local/bin.
 { config, pkgs, ... }:
 {
   home.file.".local/bin/cycle-wallpaper.sh" = {
     executable = true;
-    text = ''
-      #!/bin/sh
-      WALLPAPER_DIR="$1"
-      CURRENT_FILE="$HOME/.cache/current-wallpaper-$(basename $WALLPAPER_DIR)"
-
-      mapfile -t WALLPAPERS < <(find "$WALLPAPER_DIR" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | sort)
-
-      if [ ''${#WALLPAPERS[@]} -eq 0 ]; then
-        exit 1
-      fi
-
-      if [ -f "$CURRENT_FILE" ]; then
-        CURRENT=$(cat "$CURRENT_FILE")
-      else
-        CURRENT=0
-      fi
-
-      NEXT=$(( (CURRENT + 1) % ''${#WALLPAPERS[@]} ))
-
-      pkill swaybg
-      sleep 0.1
-      swaybg -i "''${WALLPAPERS[$NEXT]}" -m fill &
-
-      echo "$NEXT" > "$CURRENT_FILE"
-    '';
+    source = ../../scripts/home/cycle-wallpaper.sh;
   };
 
   # Opens the Claude sessions running on claude-rc. Naming convention for every Claude session:
   # <host>-<session-name>, so on claude-rc: claude-rc-orchestrator, claude-rc-indigo, claude-rc-maintenance.
   home.file.".local/bin/crc" = {
     executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      # crc            menu with the Claude sessions on claude-rc, then attach
-      # crc <name>     attach to a session (crc orchestrator = claude-rc-orchestrator)
-      # crc -l         list the sessions
-      # crc --start    recreate the missing sessions (systemctl restart claude-sessions)
-      # Detach with Ctrl+b d. Needs the ssh alias claude-rc-ts (modules/home/ssh.nix) and a key
-      # authorized on claude-rc. Another host: CLAUDE_RC_HOST=<ssh alias> crc
-      set -u
-      host="''${CLAUDE_RC_HOST:-claude-rc-ts}"
-      prefix="claude-rc-"
-
-      list_sessions() {
-        ssh "$host" "tmux list-sessions -F '#S' 2>/dev/null" | grep "^$prefix"
-      }
-
-      attach() {
-        exec ssh -t "$host" "tmux attach -t '=$1'"
-      }
-
-      case "''${1:-}" in
-        -l|--list)
-          list_sessions
-          ;;
-        --start)
-          ssh "$host" "systemctl restart claude-sessions" && list_sessions
-          ;;
-        "")
-          mapfile -t sessions < <(list_sessions)
-          if [ "''${#sessions[@]}" -eq 0 ]; then
-            echo "No Claude sessions found on $host (try: crc --start)" >&2
-            exit 1
-          fi
-          select name in "''${sessions[@]}"; do
-            [ -n "$name" ] && attach "$name"
-          done
-          ;;
-        *)
-          name="$1"
-          case "$name" in "$prefix"*) ;; *) name="$prefix$name" ;; esac
-          if ! list_sessions | grep -qx "$name"; then
-            echo "Session $name not found. Available:" >&2
-            list_sessions >&2
-            exit 1
-          fi
-          attach "$name"
-          ;;
-      esac
-    '';
+    source = ../../scripts/home/crc.sh;
   };
 
   # Sends a PDF or an image (PNG, JPEG) to DavideMark through the Indigo Telegram bot. Copy of indigo/client/indigo-send
   # (private repo): keep the two in sync. See the second-brain note 08-Homelab/01-Indigo.
   home.file.".local/bin/indigo-send" = {
     executable = true;
-    text = ''
-      #!/bin/bash
-      # Invia un PDF o un'immagine (PNG, JPEG) a DavideMark tramite il bot Indigo.
-      #
-      # Uso: indigo-send [-s sessione] file.pdf|file.png|file.jpg
-      #
-      # Il file non parte subito: il bot scrive a DavideMark che c'e' una richiesta e lui deve scrivere nel bot la FRASE
-      # stampata da questo comando. La frase va comunicata a DavideMark nella risposta della sessione Claude: e' questo che
-      # dimostra che la richiesta viene dalla sessione con cui sta parlando. La richiesta scade dopo 10 minuti.
-      #
-      # Il tipo si riconosce dal contenuto, non dall'estensione. Arriva come documento, senza compressione di Telegram.
-      # Il file viaggia in SSH verso l'utente "indigo-send" di indigo, la cui chiave puo' eseguire solo "indigo receive".
-      # Destinazioni provate in ordine (alias SSH): indigo-send (LAN), indigo-send-ts (da fuori casa, passa da homelab).
-      # Si possono cambiare con INDIGO_SEND_TARGETS="alias1 alias2".
-      set -euo pipefail
-
-      words=(tigre lago nove luna sole mare ponte fiume monte prato stella vento nuvola pietra bosco campo
-             carta penna libro tavolo sedia porta finestra strada piazza torre nave treno ruota chiave
-             campana farfalla gatto cane cavallo volpe lupo aquila delfino pesce rosa quercia pino
-             mela pera limone arancia pane latte miele sale fuoco neve pioggia alba tramonto ombra
-             specchio lampada orologio violino tamburo fiore seme radice isola)
-
-      usage() {
-          echo "Uso: indigo-send [-s sessione] file.pdf|file.png|file.jpg" >&2
-          exit 2
-      }
-
-      session=""
-      while getopts "s:h" opt; do
-          case $opt in
-              s) session=$OPTARG ;;
-              *) usage ;;
-          esac
-      done
-      shift $((OPTIND - 1))
-      [ $# -eq 1 ] || usage
-      file=$1
-
-      [ -f "$file" ] || { echo "errore: $file non esiste" >&2; exit 1; }
-      magic=$(head -c8 "$file" | od -An -tx1 | tr -d ' \n')
-      case $magic in
-          255044462d*|89504e470d0a1a0a|ffd8ff*) ;;
-          *) echo "errore: $file non e' un PDF, PNG o JPEG" >&2; exit 1 ;;
-      esac
-
-      if [ -z "$session" ]; then
-          if [ -n "''${TMUX:-}" ]; then
-              session=$(tmux display-message -p '#S')
-          else
-              session=$(hostname)
-          fi
-      fi
-
-      # Caratteri sicuri per il JSON: il server li ripulisce comunque.
-      clean() { printf '%s' "$1" | tr -c 'A-Za-z0-9._-' '_'; }
-
-      phrase=""
-      for _ in 1 2 3; do
-          i=$(( $(od -An -N2 -tu2 /dev/urandom) % ''${#words[@]} ))
-          phrase+="''${phrase:+-}''${words[$i]}"
-      done
-
-      header=$(printf '{"session":"%s","filename":"%s","phrase":"%s"}' \
-          "$(clean "$session")" "$(clean "$(basename "$file")")" "$phrase")
-
-      rc=255
-      out=""
-      for target in ''${INDIGO_SEND_TARGETS:-indigo-send indigo-send-ts}; do
-          set +e
-          out=$({ printf '%s\n' "$header"; cat "$file"; } | ssh -T -o BatchMode=yes -o ConnectTimeout=5 "$target" 2>&1)
-          rc=$?
-          set -e
-          # 255 = connessione fallita: si prova la destinazione successiva; ogni altro esito e' una risposta di indigo.
-          [ "$rc" -ne 255 ] && break
-      done
-
-      if [ "$rc" -ne 0 ]; then
-          echo "errore: invio non riuscito: $out" >&2
-          exit 1
-      fi
-
-      cat <<EOF
-      Richiesta inviata (sessione: $session, file: $(basename "$file")).
-      FRASE: $phrase
-      DavideMark deve scrivere questa frase nel bot Telegram entro 10 minuti per ricevere il PDF.
-      Scrivila ora nella tua risposta a DavideMark: il bot non la mostra.
-      EOF
-    '';
+    source = ../../scripts/home/indigo-send.sh;
   };
 
   # Mod+I: CPU, memory, disk (and battery/temperature where the PC has them) as a mako popup for a
   # few seconds. They are not in the waybar any more. The fixed id makes a second press replace it.
   home.file.".local/bin/sysinfo-popup" = {
     executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      read -r _ u1 n1 s1 i1 w1 q1 sq1 _ < /proc/stat
-      sleep 0.5
-      read -r _ u2 n2 s2 i2 w2 q2 sq2 _ < /proc/stat
-      t1=$((u1 + n1 + s1 + i1 + w1 + q1 + sq1)); t2=$((u2 + n2 + s2 + i2 + w2 + q2 + sq2))
-      cpu=$(( 100 * ((t2 - t1) - (i2 + w2 - i1 - w1)) / (t2 - t1) ))
-
-      mem=$(free -h | awk '/^Mem:/ {print $3 " / " $2}')
-      swap=$(free -h | awk '/^Swap:/ {print $3 " / " $2}')
-      disk=$(df -h --output=used,size,pcent / | awk 'NR==2 {print $1 " / " $2 " (" $3 ")"}')
-
-      body="󰻠 CPU  $cpu%\n󰍛 RAM  $mem\n󰍛 swap  $swap\n󰋊 disk  $disk"
-
-      for b in /sys/class/power_supply/BAT*; do
-        [ -r "$b/capacity" ] || continue
-        body="$body\n󰁹 battery  $(cat "$b/capacity")% ($(cat "$b/status"))"
-        break
-      done
-      # CPU package sensor by driver name (thermal_zone numbers change; zone0 can be virtual)
-      for h in /sys/class/hwmon/hwmon*; do
-        case "$(cat "$h/name" 2>/dev/null)" in
-          coretemp|k10temp|zenpower)
-            body="$body\n󰔏 temp  $(( $(cat "$h/temp1_input") / 1000 ))°C"
-            break ;;
-        esac
-      done
-
-      exec ${pkgs.libnotify}/bin/notify-send -a sysinfo -t 8000 \
-        -h string:x-canonical-private-synchronous:sysinfo "System" "$(printf '%b' "$body")"
-    '';
+    source = pkgs.replaceVars ../../scripts/home/sysinfo-popup.sh {
+      notify_send = "${pkgs.libnotify}/bin/notify-send";
+    };
   };
 
   # nix-clean: delete old system generations, keeping the one in use and the previous one (rollback),
   # then collect the garbage and refresh the bootloader entries. Alias in bash.nix, same on every host.
   home.file.".local/bin/nix-clean" = {
     executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      # nix-clean        show what goes, ask, then clean
-      # nix-clean -y     no question
-      set -u
-      sys=/nix/var/nix/profiles/system
-
-      cur=$(readlink "$sys" | sed -n 's/^system-\([0-9]*\)-link$/\1/p')
-      [ -n "$cur" ] || { echo "errore: generazione corrente non trovata"; exit 1; }
-      # Generation numbers from the profile links: `nix-env --list-generations` as a normal user
-      # tries to take the profile write lock and fails with "Permission denied".
-      nums=$(for l in "$sys"-*-link; do n=''${l##*/system-}; echo "''${n%-link}"; done | sort -n)
-      prev=$(echo "$nums" | awk -v c="$cur" '$1 < c {p = $1} END {print p}')
-      keep="$cur''${prev:+ $prev}"
-      gone=$(echo "$nums" | awk -v c="$cur" -v p="''${prev:-0}" '$1 < c && $1 != p {printf "%s ", $1}')
-
-      echo "Generazione in uso: $cur, precedente (rollback): ''${prev:-nessuna}. Restano: $keep"
-      if [ -z "$gone" ]; then echo "Generazioni di sistema da togliere: nessuna"; else echo "Generazioni di sistema da togliere: $gone"; fi
-      [ "$(readlink -f /run/booted-system)" = "$(readlink -f /run/current-system)" ] || \
-        echo "Nota: il sistema avviato non e' quello in uso (switch senza riavvio): la generazione avviata resta protetta dal garbage collector."
-      echo "Spazio libero ora: $(df -h --output=avail /nix | tail -1 | tr -d ' ')"
-
-      if [ "''${1:-}" != "-y" ]; then
-        read -r -p "Procedo? [s/N] " a
-        case "$a" in s|S|y|Y) ;; *) echo "Annullato."; exit 0 ;; esac
-      fi
-
-      # +2 counts back from the generation in use: it keeps that one and the one before it
-      sudo nix-env --delete-generations +2 -p "$sys" || exit 1
-      # No separate home-manager generations: it is a NixOS module here (useUserPackages), so its
-      # state is part of each system generation and goes with it.
-      sudo nix-collect-garbage
-      # Rewrite the boot entries from the generations that are left. No rebuild: no new generation
-      # and no change to what runs.
-      sudo "$sys/bin/switch-to-configuration" boot
-
-      echo "Spazio libero ora: $(df -h --output=avail /nix | tail -1 | tr -d ' ')"
-    '';
+    source = ../../scripts/home/nix-clean.sh;
   };
 }

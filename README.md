@@ -29,7 +29,7 @@ modules/
     fonts.nix, gaming.nix, nvidia.nix, portal.nix
   home/                   # shared home-manager modules
     bash.nix, foot.nix, gtk.nix, lock.nix,
-    mako.nix, neovim.nix, scripts.nix
+    mako.nix, neovim.nix, scripts.nix   # scripts.nix installs the shell scripts of scripts/home/
 ```
 
 `modules/common/` and `modules/home/` hold everything shared across hosts; each host only overrides or adds what actually differs (hardware, per-machine services, per-machine home config like `niri.nix`/`waybar.nix`).
