@@ -12,6 +12,7 @@
       ff = "fastfetch";
       cc = "clear";
       crc = "$HOME/.local/bin/crc";
+      nix-clean = "$HOME/.local/bin/nix-clean";
       la = "ls -lh --color=auto";
       lla = "ls -lah --color=auto";
       grep = "grep --color=auto";
