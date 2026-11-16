@@ -21,7 +21,7 @@ let
         lib.optional (cfg.ethernetInterface != null) "network#ethernet"
         ++ lib.optional (cfg.wifiInterface != null) "network#wifi"
     )
-    (lib.optional cfg.temperature "temperature")
+    (lib.optional (cfg.temperatureHwmon != null) "temperature")
     (lib.optional cfg.battery "battery")
   ];
 
@@ -130,7 +130,11 @@ let
       format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
     };
 
+    # CPU package sensor picked by device path, never by thermal_zone number (they change, and
+    # thermal_zone0 can be a virtual sensor such as INT3400).
     temperature = {
+      hwmon-path-abs = cfg.temperatureHwmon;
+      input-filename = "temp1_input";
       format = "{icon} {temperatureC}°C";
       format-icons = [ "󱃃" "󰔏" "󱃂" ];
       critical-threshold = 85;
@@ -156,7 +160,15 @@ in
     microphone = lib.mkEnableOption "microphone module";
     bluetooth = lib.mkEnableOption "bluetooth module";
     battery = lib.mkEnableOption "battery module";
-    temperature = lib.mkEnableOption "temperature module (thermal_zone0)";
+    temperatureHwmon = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "/sys/devices/platform/coretemp.0/hwmon";
+      description = ''
+        Directory that holds the hwmon* folder of the CPU package sensor (its temp1_input is read).
+        Null = no CPU sensor known on this host: the temperature module is not shown.
+      '';
+    };
     wifiInterface = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;

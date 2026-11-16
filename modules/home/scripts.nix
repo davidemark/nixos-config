@@ -201,9 +201,14 @@
         body="$body\n󰁹 battery  $(cat "$b/capacity")% ($(cat "$b/status"))"
         break
       done
-      if [ -r /sys/class/thermal/thermal_zone0/temp ]; then
-        body="$body\n󰔏 temp  $(( $(cat /sys/class/thermal/thermal_zone0/temp) / 1000 ))°C"
-      fi
+      # CPU package sensor by driver name (thermal_zone numbers change; zone0 can be virtual)
+      for h in /sys/class/hwmon/hwmon*; do
+        case "$(cat "$h/name" 2>/dev/null)" in
+          coretemp|k10temp|zenpower)
+            body="$body\n󰔏 temp  $(( $(cat "$h/temp1_input") / 1000 ))°C"
+            break ;;
+        esac
+      done
 
       exec ${pkgs.libnotify}/bin/notify-send -a sysinfo -t 8000 \
         -h string:x-canonical-private-synchronous:sysinfo "System" "$(printf '%b' "$body")"
