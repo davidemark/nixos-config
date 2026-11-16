@@ -29,7 +29,7 @@
     }
 
     #workspaces button {
-      padding: 0 4px;
+      padding: 0 8px;
       color: #626880;
       background: transparent;
       transition: all 0.2s ease;
@@ -134,7 +134,7 @@
     }
 
     #workspaces button {
-      min-width: 0;
+      min-width: 16px;
       margin: 0;
       box-shadow: none;
       text-shadow: none;
