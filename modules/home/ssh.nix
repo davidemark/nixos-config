@@ -40,8 +40,8 @@
       "indigo-send" = { HostName = "192.168.1.13"; User = "indigo-send"; };
       "indigo-send-ts" = { HostName = "192.168.1.13"; User = "indigo-send"; ProxyJump = "homelab-ts"; };
 
-      futro = { HostName = "192.168.1.101"; User = "davidemark"; };
-      "futro-ts" = { HostName = "s720"; User = "davidemark"; };
+      s720 = { HostName = "192.168.1.101"; User = "davidemark"; };
+      "s720-ts" = { HostName = "s720"; User = "davidemark"; };
     };
   };
 }
