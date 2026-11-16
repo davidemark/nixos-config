@@ -23,7 +23,7 @@
 
     layout {
         gaps 8
-        default-column-width { proportion 0.5; }
+        default-column-width { proportion 1.0; }
         preset-column-widths {
             proportion 0.5
             proportion 1.0
