@@ -14,6 +14,7 @@
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
     ../../modules/home/kafka-dev.nix
+    ../../modules/home/java-lsp.nix
     ../../modules/home/vscode.nix
     ../../modules/home/ssh.nix
     ./home/niri.nix
@@ -25,6 +26,8 @@
   home.homeDirectory = "/home/davidemark";
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
+
+  my.java.jdtlsXmx = "2g";
 
   my.waybar = {
     backlight = true;
