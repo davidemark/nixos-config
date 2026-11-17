@@ -31,4 +31,6 @@
 
   # Interfaces of the other hosts are not verified yet: they use one generic network module
   my.waybar.ethernetInterface = "enp1s0";
+  # CPU sensor k10temp, chosen by device path (hwmonN numbers change at boot)
+  my.waybar.temperatureHwmon = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
 }
