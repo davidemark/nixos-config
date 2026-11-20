@@ -99,9 +99,12 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   2. Send the request with the context the other session lacks, as a plain request (`tmux send-keys`, then Enter). Say in the
      message that it comes from another session on behalf of DavideMark.
   3. Read the answer from the session log, not from the screen: the target session writes its work in `sessions-log` (see below).
-     For a long job, start a background check on today's file of that session (exit when an entry of this request has state
-     `completato`, `in attesa di OK` or `bloccato`, or after a time limit) so the result comes back while DavideMark keeps
-     talking here. If nothing shows up before the limit, tell him and look at the screen as a fallback.
+     Do NOT start a background check by default (memory on claude-rc ran out on 2026-11-19, decision of DavideMark 2026-11-20):
+     before any possible background check, ask DavideMark if he wants it and say in two lines whether it is worth it for that
+     case and why. If he agrees, check today's file of that session (exit when an entry of this request has state `completato`,
+     `in attesa di OK` or `bloccato`, or after a time limit). Without his yes, read the log when he asks or when the request ends;
+     if nothing shows up, tell him and look at the screen as a fallback. If the system stops a background check for low memory,
+     do not restart it unless he asks.
   4. Approvals: the target session commits and pushes on its own (see the commit rule), but deploys, deletions and anything
      that needs DavideMark's decision are asked to him. If the log says `in attesa di OK`, relay the question to him and forward
      only his literal answer; never answer it on my own. The rules of the target session still apply.
