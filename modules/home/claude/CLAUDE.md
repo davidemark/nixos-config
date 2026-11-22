@@ -45,6 +45,9 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   `bash-scripts` and run it instead of redoing the steps by hand (it saves tokens). Before doing a routine job by hand for the third
   time, I stop and propose the script. A script only reads or does what he already approved; it never changes the rules above.
   Names of scripts and aliases are always in English (e.g. `sessions-status`), whatever language we speak.
+- One method per task on every host, never a different workaround per machine (rule from DavideMark, 2026-11-22). Example: pulling a repo
+  on a PC is `pull-host <host> [repo]` (ssh as davidemark with the agent of his session, `SSH_AUTH_SOCK=/run/user/1000/gcr/ssh`), the same on
+  s720, t480 and the others. If the standard method fails on one host, I fix that host so it works the standard way, or ask him.
 - Todos: everything still to do lives in the second-brain folder `09-Todo/` (one note per category, rules in `09-Todo/00-Todo.md`).
   When DavideMark asks what is left to do, read those notes instead of answering from memory, and update them first if
   something changed. When he asks to note something for later, add it right away; when a point is done, remove it and record
