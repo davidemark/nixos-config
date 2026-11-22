@@ -8,10 +8,15 @@
     ../../modules/home/java-lsp.nix
     ../../modules/home/vscode.nix
     ../../modules/home/ssh.nix
-    ./home/niri.nix
+    ../../modules/home/niri.nix
     ../../modules/home/waybar.nix
     ../../modules/home/waybar-style.nix
   ];
+
+  my.niri = {
+    touchpad = true;
+    columnWidth = "1.0";
+  };
 
   my.java.jdtlsXmx = "2g";
 

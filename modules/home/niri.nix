@@ -1,19 +1,54 @@
-{ config, pkgs, ... }:
+# niri: the same keyboard layout, look and key bindings on every host. What differs per host is set
+# with my.niri.* in hosts/<host>/home.nix.
+{ config, lib, ... }:
 
+let
+  cfg = config.my.niri;
+  indented = lib.concatMapStrings (line: "\n    ${line}");
+  outputs = lib.optionalString (cfg.outputs != [ ]) (lib.concatStringsSep "\n" cfg.outputs + "\n\n");
+  touchpad = lib.optionalString cfg.touchpad (indented [
+    "touchpad {"
+    "    tap"
+    "    natural-scroll"
+    "    click-method \"clickfinger\""
+    "}"
+  ]);
+  audioFallback = indented cfg.audioFallbackKeys;
+  extraBinds = indented cfg.extraBinds;
+in
 {
-  home.file.".config/niri/config.kdl".text = ''
-    input {
+  options.my.niri = {
+    outputs = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Lines of the output blocks, at the top of the config (e.g. a fixed mode).";
+    };
+    touchpad = lib.mkEnableOption "the touchpad settings (laptops)";
+    columnWidth = lib.mkOption {
+      type = lib.types.str;
+      default = "0.5";
+      description = "default-column-width proportion of a new window.";
+    };
+    audioFallbackKeys = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Extra audio key bindings, placed after the XF86 mic mute binding.";
+    };
+    extraBinds = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Extra key bindings at the end of the binds block.";
+    };
+  };
+
+  config.home.file.".config/niri/config.kdl".text = ''
+    ${outputs}input {
         keyboard {
             xkb {
                 layout "us"
                 options "ctrl:nocaps"
             }
-        }
-        touchpad {
-            tap
-            natural-scroll
-            click-method "clickfinger"
-        }
+        }${touchpad}
     }
 
     cursor {
@@ -23,7 +58,7 @@
 
     layout {
         gaps 8
-        default-column-width { proportion 0.5; }
+        default-column-width { proportion ${cfg.columnWidth}; }
         preset-column-widths {
             proportion 0.5
             proportion 1.0
@@ -114,7 +149,7 @@
         XF86AudioRaiseVolume allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; }
         XF86AudioLowerVolume allow-when-locked=true { spawn "sh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
         XF86AudioMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-        XF86AudioMicMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+        XF86AudioMicMute allow-when-locked=true { spawn "sh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }${audioFallback}
         XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
         XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
         XF86AudioPlay { spawn "playerctl" "play-pause"; }
@@ -122,7 +157,7 @@
         XF86AudioPrev { spawn "playerctl" "previous"; }
 
         Print { screenshot; }
-        Ctrl+Print { screenshot-screen; }
+        Ctrl+Print { screenshot-screen; }${extraBinds}
     }
   '';
 }
