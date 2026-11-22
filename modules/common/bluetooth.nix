@@ -1,3 +1,4 @@
+# Bluetooth stack and tools (off at boot), for the hosts with a Bluetooth adapter.
 { config, pkgs, ... }:
 
 {

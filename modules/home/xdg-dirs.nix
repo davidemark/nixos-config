@@ -1,3 +1,4 @@
+# Lowercase XDG user directories.
 { config, ... }:
 {
   # Lowercase user directories; home-manager owns ~/.config/user-dirs.dirs so xdg-user-dirs-update cannot revert them.

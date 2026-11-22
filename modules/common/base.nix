@@ -1,3 +1,4 @@
+# Base system for every workstation: nix settings and gc, locale, NetworkManager, niri, SSH, graphics, podman and the common packages.
 { config, pkgs, ... }:
 
 {

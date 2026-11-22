@@ -1,3 +1,4 @@
+# Starship prompt.
 { config, pkgs, ... }:
 
 {

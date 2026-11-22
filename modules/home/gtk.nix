@@ -1,3 +1,4 @@
+# GTK theme, icons and cursor (Catppuccin Frappe, Papirus).
 { config, pkgs, ... }:
 {
   gtk = {

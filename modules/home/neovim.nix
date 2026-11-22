@@ -1,3 +1,4 @@
+# Neovim through nixvim: options, plugins, language servers and keymaps (Java extras are in java-lsp.nix).
 { config, pkgs, ... }:
 
 {

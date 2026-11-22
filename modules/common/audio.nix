@@ -1,3 +1,4 @@
+# PipeWire audio with realtime scheduling (RTKit).
 { config, pkgs, ... }:
 
 {

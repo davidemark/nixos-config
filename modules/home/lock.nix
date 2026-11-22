@@ -1,3 +1,4 @@
+# swaylock lock screen look.
 { config, pkgs, ... }:
 {
   programs.swaylock = {

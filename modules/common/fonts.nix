@@ -1,3 +1,4 @@
+# System fonts.
 { config, pkgs, ... }:
 {
   fonts.packages = with pkgs; [

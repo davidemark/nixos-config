@@ -1,3 +1,4 @@
+# Development toolchains: Go, JDK 25 with Maven, Node.js, Python.
 { pkgs, ... }:
 
 {

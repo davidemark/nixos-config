@@ -10,36 +10,37 @@ My personal NixOS configuration, managed as a single [Nix flake](https://nixos.w
 | `d3d3` | |
 | `hp` | laptop |
 | `s720` | |
-| `t480` | ThinkPad — TLP/thermald power management, libvirtd/virt-manager |
+| `t480` | ThinkPad, TLP/thermald power management |
 
-Each host has its own `configuration.nix` (+ `hardware-configuration.nix`, generated) and `home.nix`, importing shared modules and adding only what's host-specific (e.g. `t480`'s power management and virtualisation, `hp`'s laptop-specific bits).
+Each host has its own `configuration.nix` (+ `hardware-configuration.nix`, generated) and `home.nix`. Everything shared lives in `modules/`; a host adds only what is specific to it (`t480`'s power management and Kafka tooling, `hp`'s laptop bits, `master`'s NVIDIA setup, `s720`'s static network and Wake-on-LAN).
 
 ## Structure
 
 ```
-flake.nix                 # entry point — one nixosConfiguration per host
+flake.nix                 # entry point: mkHost builds one nixosConfiguration per host
 hosts/<name>/
   configuration.nix       # system config for this host
   hardware-configuration.nix
-  home.nix                # home-manager entry point for this host
-  home/                   # host-specific home-manager modules (niri, waybar, ...)
+  home.nix                # home-manager entry point: imports modules/home/base.nix and sets the my.* options
 modules/
   common/                 # shared system-level modules
-    apps.nix, audio.nix, base.nix, bluetooth.nix,
-    fonts.nix, gaming.nix, nvidia.nix, portal.nix
+    workstation.nix       # user, swaylock PAM, stateVersion (every host)
+    base.nix, dev.nix, audio.nix, fonts.nix, portal.nix   # every host
+    telegram.nix          # every host except hp
+    bluetooth.nix, gaming.nix, nvidia.nix, indigo-diag.nix  # only where needed
   home/                   # shared home-manager modules
-    bash.nix, foot.nix, gtk.nix, lock.nix,
-    mako.nix, neovim.nix, scripts.nix   # scripts.nix installs the shell scripts of scripts/home/
+    base.nix              # user + the modules every host uses (bash, starship, foot, mako, gtk, ...)
+    niri.nix, waybar.nix, waybar-style.nix, wallpaper.nix, neovim.nix, ...
+scripts/home/             # shell scripts installed by modules/home/scripts.nix and wallpaper.nix
 ```
 
-`modules/common/` and `modules/home/` hold everything shared across hosts; each host only overrides or adds what actually differs (hardware, per-machine services, per-machine home config like `niri.nix`/`waybar.nix`).
+Per-host differences are options, not copies: `my.niri.*` (touchpad, column width, outputs, extra keys), `my.waybar.*` (modules and network interfaces), `my.wallpaper.resolution`, `my.java.jdtlsXmx`.
 
 ## What's in it
 
 - **Window manager**: [niri](https://github.com/YaLTeR/niri) (scrollable-tiling Wayland compositor), with `waybar`, `mako` (notifications), `fuzzel`, `swaylock`/`swayidle`.
 - **Shell/editor**: `bash` + `neovim`, configured via home-manager.
 - **Containers**: `podman` with Docker compatibility (`virtualisation.podman.dockerCompat`), so `docker` commands work against the Podman backend.
-- **Virtualisation**: `libvirtd` + `virt-manager` (on hosts that need VMs).
 - **Networking**: NetworkManager, Tailscale.
 - **Housekeeping**: automatic weekly garbage collection (`nix.gc`, 30-day retention), `auto-optimise-store`.
 

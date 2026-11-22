@@ -1,3 +1,4 @@
+# Steam, gamemode and game launchers (t480, master).
 { pkgs, ... }:
 
 {

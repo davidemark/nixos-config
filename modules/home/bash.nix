@@ -1,3 +1,4 @@
+# Bash: aliases, session variables and the shell setup shared by every host.
 { config, pkgs, ... }:
 {
   programs.bash = {

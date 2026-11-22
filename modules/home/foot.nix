@@ -1,3 +1,4 @@
+# foot terminal: font and Catppuccin Frappe colours.
 { config, pkgs, ... }:
 {
   home.file.".config/foot/foot.ini".text = ''

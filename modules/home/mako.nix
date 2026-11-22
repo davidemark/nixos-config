@@ -1,3 +1,4 @@
+# mako notifications: colours and the sysinfo popup rule.
 { config, pkgs, ... }:
 {
   services.mako = {

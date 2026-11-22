@@ -1,3 +1,4 @@
+# NVIDIA driver and the CachyOS kernel for master (RTX 4070).
 { config, pkgs, ... }:
 
 {

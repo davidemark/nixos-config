@@ -1,3 +1,4 @@
+# XDG desktop portal, gvfs and thumbnails for the file manager and file dialogs.
 { config, pkgs, ... }:
 
 {

@@ -1,3 +1,4 @@
+# Global Claude Code instructions, deployed to ~/.claude/CLAUDE.md.
 { config, pkgs, ... }:
 {
   # Global Claude Code instructions, identical on every host.
