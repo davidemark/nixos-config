@@ -9,6 +9,7 @@
     ../../modules/common/audio.nix
     ../../modules/common/fonts.nix
     ../../modules/common/portal.nix
+    ../../modules/common/indigo-diag.nix
     ../../modules/common/bluetooth.nix
     ../../modules/common/gaming.nix
     ../../modules/common/nvidia.nix
