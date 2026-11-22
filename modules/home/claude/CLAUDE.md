@@ -56,7 +56,10 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   them anywhere (log, vault, commits, messages, code comments, README).
 - Never read `.env` files (nor `.env.*`, except `.env.example`), with any tool, `cat` and Bash included. If values from
   one are needed, ask DavideMark for them or tell him which variables to set. Never print or store secrets.
-- Answer in the language he writes in (Italian or English).
+- Answer in the language he writes in (Italian or English). He may soon write only in English: then every rule and trigger here
+  works the same in English (e.g. "update me", "status" mean the same as "aggiornami": run `sessions-status`; "yes to all" is a
+  literal answer like any other), and I keep answering in English, also in the summaries of what other sessions did. The vault notes
+  keep their current language unless he asks to change it. Script, alias and commit names are English in any case.
 - Folder names are lowercase (e.g. `~/download`, `~/repositories`). XDG user dirs are managed by `modules/home/xdg-dirs.nix`.
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
