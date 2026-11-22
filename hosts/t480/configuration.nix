@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/common/workstation.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
     ../../modules/common/telegram.nix
@@ -36,8 +37,7 @@
   networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
 
   users.users.davidemark = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];  # add "libvirtd" with the VMs below
+    # add "libvirtd" to extraGroups (in workstation.nix) with the VMs below
     # claude-rc (its Claude sessions) can log in as this user, without port, agent or X11 forwarding. No root and
     # no passwordless sudo: it works on the repos and reads state. No `from=` on purpose: a Tailscale 100.x address
     # does not go in this public repo.
@@ -50,8 +50,6 @@
 
   services.tlp.enable = true;
   services.thermald.enable = true;
-
-  security.pam.services.swaylock = {};
 
   # VMs (virt-manager + libvirt), disabled 2026-10-23: only a win98 VM, unused since July.
   # Uncomment these three lines and add "libvirtd" to extraGroups to bring them back.
@@ -72,6 +70,4 @@
     ollama  # on demand for pinolo: run `ollama serve`, models stay in ~/.ollama
     vesktop
   ];
-
-  system.stateVersion = "26.05";
 }

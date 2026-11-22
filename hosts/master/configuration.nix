@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/common/workstation.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
     ../../modules/common/telegram.nix
@@ -28,14 +29,7 @@
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "192.168.1.11" "8.8.8.8" ];
 
-  users.users.davidemark = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
-  };
-
   services.tailscale.enable = true;
-
-  security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
     distrobox
@@ -45,6 +39,4 @@
     qbittorrent
     vesktop
   ];
-
-  system.stateVersion = "26.05";
 }

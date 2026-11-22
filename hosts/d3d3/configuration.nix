@@ -4,6 +4,7 @@
   imports = [
     # Generate on the machine itself: sudo nixos-generate-config --show-hardware-config > hosts/d3d3/hardware-configuration.nix
     ./hardware-configuration.nix
+    ../../modules/common/workstation.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
     ../../modules/common/telegram.nix
@@ -19,16 +20,7 @@
 
   networking.hostName = "d3d3";
 
-  users.users.davidemark = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
-  };
-
   services.tailscale.enable = true;
 
   services.thermald.enable = true;
-
-  security.pam.services.swaylock = {};
-
-  system.stateVersion = "26.05";
 }

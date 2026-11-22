@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/common/workstation.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
     ../../modules/common/audio.nix
@@ -16,20 +17,11 @@
 
   networking.hostName = "hp";
 
-  users.users.davidemark = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
-  };
-
   services.tlp.enable = true;
   services.thermald.enable = true;
-
-  security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
     brightnessctl
     mgba
   ];
-
-  system.stateVersion = "26.05";
 }

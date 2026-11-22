@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/common/workstation.nix
     ../../modules/common/base.nix
     ../../modules/common/dev.nix
     ../../modules/common/audio.nix
@@ -47,8 +48,6 @@
   };
 
   users.users.davidemark = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     # claude-rc (its Claude sessions) can also log in as this user, without port, agent or X11 forwarding. No
     # root and no passwordless sudo. No `from=` on purpose: a Tailscale 100.x address does not go in this public repo.
     openssh.authorizedKeys.keys = [
@@ -70,8 +69,6 @@
   services.tlp.settings.WOL_DISABLE = "N";
   services.thermald.enable = true;
 
-  security.pam.services.swaylock = {};
-
   environment.systemPackages = with pkgs; [
     distrobox
     dwarf-fortress
@@ -79,6 +76,4 @@
     qbittorrent
     vesktop
   ];
-
-  system.stateVersion = "26.05";
 }
