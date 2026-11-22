@@ -1,4 +1,4 @@
-# Telegram Desktop on every NixOS host except s720 and hp (t480, master, d3d3).
+# Telegram Desktop on every NixOS host except hp (t480, master, d3d3, s720).
 { pkgs, ... }:
 
 {
