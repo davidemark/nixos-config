@@ -8,6 +8,7 @@
     ../../modules/common/audio.nix
     ../../modules/common/fonts.nix
     ../../modules/common/portal.nix
+    ../../modules/common/indigo-diag.nix
     ../../modules/common/telegram.nix
   ];
 
