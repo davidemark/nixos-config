@@ -40,6 +40,11 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
   links), even if a tool reminder suggests them. Applies to every repo, vault included.
 - Name: in commit messages and in the second-brain notes call the user DavideMark, never "Davide" (also for new
   text in repo docs). Do not rewrite old mentions unless he asks.
+- Repeated tasks become scripts (rule from DavideMark, 2026-11-22): when he asks for the same kind of thing often (status checks of the
+  sessions, log reads, routing a request, host checks), I propose a script that does it, and once he agrees I write it, keep it in
+  `bash-scripts` and run it instead of redoing the steps by hand (it saves tokens). Before doing a routine job by hand for the third
+  time, I stop and propose the script. A script only reads or does what he already approved; it never changes the rules above.
+  Names of scripts and aliases are always in English (e.g. `sessions-status`), whatever language we speak.
 - Todos: everything still to do lives in the second-brain folder `09-Todo/` (one note per category, rules in `09-Todo/00-Todo.md`).
   When DavideMark asks what is left to do, read those notes instead of answering from memory, and update them first if
   something changed. When he asks to note something for later, add it right away; when a point is done, remove it and record
