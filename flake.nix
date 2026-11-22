@@ -13,90 +13,35 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, nix-cachyos-kernel, ... }: {
-    nixosConfigurations = {
-      
-      master = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, nixvim, nix-cachyos-kernel, ... }:
+    let
+      # One workstation: hosts/<host>/configuration.nix (system) and hosts/<host>/home.nix (home-manager,
+      # as a NixOS module, so one rebuild updates both). extraModules are host-specific system modules.
+      mkHost = host: extraModules: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/master/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.davidemark = import ./hosts/master/home.nix;
-            home-manager.sharedModules = [
-              nixvim.homeModules.nixvim
-            ];
-          }
-        ];
-      };
-
-      s720 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/s720/configuration.nix
+          ./hosts/${host}/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.davidemark = import ./hosts/s720/home.nix;
+            home-manager.users.davidemark = import ./hosts/${host}/home.nix;
             home-manager.sharedModules = [
               nixvim.homeModules.nixvim
             ];
           }
-        ];
+        ] ++ extraModules;
       };
-
-      t480 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/t480/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.davidemark = import ./hosts/t480/home.nix;
-            home-manager.sharedModules = [
-              nixvim.homeModules.nixvim
-            ];
-          }
+    in
+    {
+      nixosConfigurations = {
+        master = mkHost "master" [
+          { nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ]; }
         ];
+        s720 = mkHost "s720" [ ];
+        t480 = mkHost "t480" [ ];
+        hp = mkHost "hp" [ ];
+        d3d3 = mkHost "d3d3" [ ];
       };
-
-      hp = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/hp/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.davidemark = import ./hosts/hp/home.nix;
-            home-manager.sharedModules = [
-              nixvim.homeModules.nixvim
-            ];
-          }
-        ];
-      };
-
-      d3d3 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/d3d3/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.davidemark = import ./hosts/d3d3/home.nix;
-            home-manager.sharedModules = [
-              nixvim.homeModules.nixvim
-            ];
-          }
-        ];
-      };
-
     };
-  };
 }
