@@ -63,13 +63,13 @@ This file is deployed to `~/.claude/CLAUDE.md` on every machine. Source of truth
 - Folder names are lowercase (e.g. `~/download`, `~/repositories`). XDG user dirs are managed by `modules/home/xdg-dirs.nix`.
   On a machine without it: rename the folder with `mv` (contents move with it; merge only if both exist), then set
   `~/.config/user-dirs.dirs` and `~/.config/user-dirs.conf` (`enabled=False`) so `xdg-user-dirs-update` does not revert it.
-- VS Code: every NixOS host has VS Code with the same extensions, except s720 and hp, which must not have it (decision of
-  DavideMark, 2026-11-14). The extensions are declared once in `modules/home/vscode.nix`, imported by each host that has it
-  (today t480, master, d3d3; a new NixOS host imports it too). A new extension goes in that list, never in a single host; one that
+- VS Code: every NixOS host has VS Code with the same extensions, except hp, which must not have it (decision of
+  DavideMark, 2026-11-14; s720 added 2026-11-23, he accepts its 3.5 GB of RAM). The extensions are declared once in `modules/home/vscode.nix`, imported by each host that has it
+  (today t480, master, d3d3, s720; a new NixOS host imports it too). A new extension goes in that list, never in a single host; one that
   is not in nixpkgs is noted in the comment of the same file and in the vault (`06-Infrastructure`).
   The Mac m2 (not NixOS) is included too: DavideMark installs the same extensions there by hand, from the reference list in the
   comment of `modules/home/vscode.nix` and in the vault; keep both lists equal when an extension is added.
-- Telegram Desktop: every NixOS host has it except hp (VS Code still excludes s720 too; decision of DavideMark, 2026-11-14; s720 added
+- Telegram Desktop: every NixOS host has it except hp (decision of DavideMark, 2026-11-14; s720 added
   2026-11-22). It is declared once in `modules/common/telegram.nix`, imported by each host that has it (today t480, master, d3d3, s720; a new NixOS host
   imports it too). The Mac m2 (not NixOS) already has it, nothing to do there.
 

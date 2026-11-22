@@ -14,6 +14,7 @@
     ../../modules/home/ssh.nix
     ../../modules/home/claude.nix
     ../../modules/home/neovim.nix
+    ../../modules/home/vscode.nix
     ../../modules/home/kafka-dev.nix
     ../../modules/home/java-lsp.nix
     ./home/niri.nix
@@ -26,7 +27,7 @@
   home.stateVersion = "26.05";
   programs.home-manager.enable = true;
 
-  # 4 GB of RAM: leave room for Maven, the app under test and the browser
+  # 4 GB of RAM (3.5 usable): VS Code is here too, used without other heavy programs; leave room for Maven and the app under test
   my.java.jdtlsXmx = "1g";
 
   # Interfaces of the other hosts are not verified yet: they use one generic network module
