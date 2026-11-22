@@ -24,11 +24,6 @@ in
       description = "Lines of the output blocks, at the top of the config (e.g. a fixed mode).";
     };
     touchpad = lib.mkEnableOption "the touchpad settings (laptops)";
-    columnWidth = lib.mkOption {
-      type = lib.types.str;
-      default = "0.5";
-      description = "default-column-width proportion of a new window.";
-    };
     audioFallbackKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -58,7 +53,7 @@ in
 
     layout {
         gaps 8
-        default-column-width { proportion ${cfg.columnWidth}; }
+        default-column-width { proportion 1.0; }
         preset-column-widths {
             proportion 0.5
             proportion 1.0

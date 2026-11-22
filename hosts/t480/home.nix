@@ -13,10 +13,7 @@
     ../../modules/home/waybar-style.nix
   ];
 
-  my.niri = {
-    touchpad = true;
-    columnWidth = "1.0";
-  };
+  my.niri.touchpad = true;
 
   my.java.jdtlsXmx = "2g";
 
