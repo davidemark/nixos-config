@@ -12,6 +12,7 @@
     ../../modules/common/portal.nix
     ../../modules/common/indigo-diag.nix
     ../../modules/common/bluetooth.nix
+    ../../modules/common/steam.nix
     ../../modules/common/gaming.nix
   ];
 
