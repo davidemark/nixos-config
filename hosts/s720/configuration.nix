@@ -72,7 +72,6 @@
   environment.systemPackages = with pkgs; [
     distrobox
     dwarf-fortress
-    mgba
     qbittorrent
     vesktop
   ];

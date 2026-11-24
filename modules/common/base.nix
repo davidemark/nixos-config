@@ -67,6 +67,7 @@
     lazygit
     libarchive  # bsdtar: reads and writes zip, tar, 7z (bsdtar -a -cf x.zip dir)
     mako
+    mgba  # Game Boy Advance emulator; the ROMs live in ~/games/roms (sync-roms keeps them in step with Drive)
     nchat
     neovim
     papirus-icon-theme

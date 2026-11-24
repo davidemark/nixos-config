@@ -14,6 +14,7 @@
       cc = "clear";
       crc = "$HOME/.local/bin/crc";
       nix-clean = "$HOME/.local/bin/nix-clean";
+      sync-roms = "$HOME/repositories/bash-scripts/sync-roms";
       la = "ls -lh --color=auto";
       lla = "ls -lah --color=auto";
       grep = "grep --color=auto";

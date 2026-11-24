@@ -15,7 +15,6 @@
     heroic
     lutris
     mangohud
-    mgba
     openmw
   ];
 }

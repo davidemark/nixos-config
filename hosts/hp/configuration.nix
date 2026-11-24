@@ -22,6 +22,5 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl
-    mgba
   ];
 }
