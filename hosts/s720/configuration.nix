@@ -11,7 +11,6 @@
     ../../modules/common/portal.nix
     ../../modules/common/indigo-diag.nix
     ../../modules/common/telegram.nix
-    ../../modules/common/steam.nix
   ];
 
   swapDevices = [{ device = "/swapfile"; size = 4096; }];
@@ -22,17 +21,6 @@
   };
   # use amdgpu instead of radeon for better performance on Kabini (GX-222GC)
   boot.kernelParams = [ "amdgpu.cik_support=1" "radeon.cik_support=0" ];
-
-  # Steam (Morrowind, base game through Proton) on a Radeon HD 8280E (Kabini, GCN 1.1) with 3.5 GB of RAM.
-  # - Vulkan: RADV (Mesa) supports GCN 1.1 only through the amdgpu driver, which the cik_support kernel
-  #   parameters above already select; the 32-bit Mesa that Steam and Proton need comes from
-  #   hardware.graphics.enable32Bit in base.nix. Nothing else to add for the driver.
-  # - No Steam autostart: nothing in niri or systemd starts it, the client (a browser engine, ~500 MB) runs only
-  #   when launched (Mod+G).
-  # - Left out on purpose, they only use RAM or CPU here: gamescope session, gamemode, Remote Play ports (gaming.nix).
-  # - If Proton's default (DXVK, Vulkan) glitches in a game, set the game's launch option in Steam to
-  #   PROTON_USE_WINED3D=1 %command% (OpenGL through radeonsi, steadier on old GPUs). See the vault, 06-Infrastructure.
-  # vulkan-tools (below): vulkaninfo --summary shows whether RADV sees the GPU.
 
   networking.hostName = "s720";
 
@@ -87,6 +75,5 @@
     mgba
     qbittorrent
     vesktop
-    vulkan-tools
   ];
 }
