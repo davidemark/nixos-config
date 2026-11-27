@@ -42,6 +42,7 @@
         t480 = mkHost "t480" [ ];
         hp = mkHost "hp" [ ];
         d3d3 = mkHost "d3d3" [ ];
+        soyo = mkHost "soyo" [ ];
       };
     };
 }
